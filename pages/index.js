@@ -1,15 +1,18 @@
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
-import { getSession, signOut, useSession } from 'next-auth/react'
+import { getSession, signOut, useSession,getProviders} from 'next-auth/react'
 import Link from 'next/link'
-
+import SignButton from '../components/SignButton';
 
 
 export default function Home({Session}) {
- 
+  
+  
    if(!Session)return(
-   <Link href="/auth/signin">Sign In</Link>
-   )
+    
+    <SignButton/>
+  );
+   
      
  
   return (
@@ -18,14 +21,9 @@ export default function Home({Session}) {
     <div>Profile Name : {Session.user.name}</div> 
      <div>Profile Image : </div>
      <Image src={Session.user.image} height={40} width={40} />
-     <button onClick={signOut}>Sign out</button>
+     <div onClick={signOut}>Sign out</div>
     </div>
   )
 }
-export async function getServerSideProps(context){
-  const Session = await getSession(context) || null;
-  return {
-    props:{Session }
-  }
-}
+
 
