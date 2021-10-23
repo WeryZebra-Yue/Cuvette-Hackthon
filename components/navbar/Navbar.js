@@ -47,15 +47,17 @@ function PrimaryNavbar({ userDetails }) {
         </ul>
       </div>
       <div className={navbarStyles.navbar_user_details_sec}>
-        <div className={navbarStyles.navbar_user_image}>
-          <Image
-            src={userDetails.image}
-            height="100%"
-            width="100%"
-            layout="responsive"
-          />
-        </div>
-        <h5 className={navbarStyles.navbar_user_name}>{userDetails.name}</h5>
+        {userDetails?.image ? (
+          <div className={navbarStyles.navbar_user_image}>
+            <Image
+              src={userDetails?.image}
+              height="100%"
+              width="100%"
+              layout="responsive"
+            />
+          </div>
+        ) : null}
+        <h5 className={navbarStyles.navbar_user_name}>{userDetails?.name}</h5>
       </div>
     </nav>
   );
