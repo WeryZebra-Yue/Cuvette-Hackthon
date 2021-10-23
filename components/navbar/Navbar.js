@@ -28,12 +28,12 @@ function PrimaryNavbar({ userDetails }) {
           </li>
           <li
             className={
-              router.pathname == "/path"
+              router.pathname == "/paths"
                 ? `${navbarStyles.primary_navbar_link} ${navbarStyles.active_primary_nav_link}`
                 : navbarStyles.primary_navbar_link
             }
           >
-            <Link href="/path">Learning paths</Link>
+            <Link href="/paths">Learning paths</Link>
           </li>
           <li
             className={
