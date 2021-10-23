@@ -29,3 +29,12 @@ a {
 .bg_change_hover:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
+ul,
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
