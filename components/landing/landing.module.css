@@ -1,0 +1,72 @@
+.landing_primary_wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: var(--primary-dark-color);
+}
+
+.landing_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 33px;
+}
+
+.landing_nav_logo {
+  width: 100px;
+  cursor: pointer;
+  height: fit-content;
+}
+
+.sign_in_button {
+  position: absolute;
+  right: 60px;
+  color: white;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  border: 1px solid #ffffff;
+  padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 4px;
+}
+
+.landing_content_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  /* position: relative; */
+  /* height: 90vh; */
+}
+
+.landing_title {
+  color: white;
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-top: 100px;
+}
+
+.landing_start_learning_now_button {
+  color: white;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  border: 1px solid #ffffff;
+  padding: 12px;
+  padding-left: 45px;
+  padding-right: 45px;
+  border-radius: 4px;
+  margin-top: 90px;
+}
+
+.landing_primary_graphic {
+  position: absolute;
+  bottom: 30px;
+  width: 1200px;
+}

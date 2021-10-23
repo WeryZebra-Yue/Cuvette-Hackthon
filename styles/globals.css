@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 /* font-family: 'Montserrat', sans-serif; */
 html,
 body {
@@ -15,4 +15,17 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  --primary-dark-color: #36323d;
+}
+
+.bg_change_hover {
+  transition: background 0.1s ease-out;
+  cursor: pointer;
+}
+
+.bg_change_hover:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
