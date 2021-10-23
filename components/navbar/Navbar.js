@@ -13,9 +13,11 @@ function PrimaryNavbar({ userDetails }) {
   return (
     <nav className={navbarStyles.navbar_primary_wrapper}>
       <div className={navbarStyles.navbar_left_sec}>
-        <div className={navbarStyles.primary_navbar_logo}>
-          <Image src={logo} layout="responsive" />
-        </div>
+        <Link href="/">
+          <div className={navbarStyles.primary_navbar_logo}>
+            <Image src={logo} layout="responsive" />
+          </div>
+        </Link>
         <ul className={navbarStyles.primary_navbar_links}>
           <li
             className={

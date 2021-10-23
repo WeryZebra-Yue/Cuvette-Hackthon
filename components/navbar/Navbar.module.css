@@ -25,6 +25,7 @@
 .primary_navbar_logo {
   height: fit-content;
   width: 100px;
+  cursor: pointer;
 }
 
 .primary_navbar_links {
