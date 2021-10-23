@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
-import { getSession, useSession } from 'next-auth/react'
+import { getSession, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 
@@ -18,6 +18,7 @@ export default function Home({Session}) {
     <div>Profile Name : {Session.user.name}</div> 
      <div>Profile Image : </div>
      <Image src={Session.user.image} height={40} width={40} />
+     <button onClick={signOut}>Sign out</button>
     </div>
   )
 }
