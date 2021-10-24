@@ -32,7 +32,7 @@ function ForumPage({
   const dispatch = useDispatch()
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = React.useState(false);
   useEffect(()=>{
-    
+    if(searchBarInputRef?.current?.value!=''){
     getDocs(query(collection(db,"question"),where("tags","array-contains",searchBarInputRef?.current.value))).then((snap)=>{
       let list = []
       
@@ -43,7 +43,7 @@ function ForumPage({
       console.log(list)
       setFourmData(list)
    })
-   
+  }
  
   },[searchBarInputRef?.current?.value])
   useEffect(()=>{
@@ -60,9 +60,9 @@ function ForumPage({
      })
     }
   
-    
+      
    
-  },[State,searchBarInputRef?.current?.value])
+  },[State])
 
   // console.log(forumData)
 
