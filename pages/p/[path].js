@@ -54,7 +54,7 @@ function path({ Session }) {
       let uset = [data.email.slice()];
 
       console.log(data.user);
-      for (let index = 0; index < data.user.length; index++) {
+      for (let index = 0; index < data.user?.length; index++) {
         uset.push(data.user[index]);
       }
       console.log(uset.length);

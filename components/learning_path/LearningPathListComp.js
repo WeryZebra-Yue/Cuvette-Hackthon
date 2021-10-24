@@ -12,18 +12,20 @@ import LearningPathListCompStyles from "./LearningPathListComp.module.css";
 
 import { Updates } from "../../action";
 
-import { deleteDoc, doc } from "@firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "../../firebases";
+import router from "next/router";
 
-function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
+function LearningPathListComp({ title, pathsData, isOwner, onButtonClick ,Session}) {
   const dispatch = useDispatch();
   const [DeletePath, setDeletePath] = useState(null);
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = React.useState(false);
-
+const [data , setData] = useState(pathsData)
   return (
     <div className={LearningPathListCompStyles.l_l_primary_wrapper}>
       <h4 className={LearningPathListCompStyles.l_l_title}>{title}</h4>
       <div className={LearningPathListCompStyles.l_l_list_wrapper}>
+
         {pathsData?.map((path, index) => {
           return (
             <div
@@ -53,7 +55,7 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
                       //
                       setDeletePath(`${path.email}-${path.Title}`);
                       setIsDeletePopUpOpen(true);
-                      console.log("Suuu?");
+                      
                     }}
                   />
                 </div>
@@ -63,7 +65,21 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
                     LearningPathListCompStyles.l_l_list_item_leave_button
                   }
                   onClick={() => {
-                    onButtonClick(`${path.email}-${path.Title}`);
+                    let users = []
+                   getDoc(doc(db,"path",`${path.email}-${path.Title}`)).then((snapshot)=>{
+                      users = snapshot.data()?.user?snapshot.data()?.user:[];
+                      console.log(`${path.email}-${path.Title}`)
+                   })
+                     console.log(users,Session.user.email.split('@')[0] )
+                     
+                     setDoc(doc(db,"path",`${path.email}-${path.Title}`),{
+                       user : users
+                     },{merge:true}).then(()=>{
+                       router.reload()
+                     })
+                 
+
+
                   }}
                 >
                   <Image src={leaveButton} fill="responsive" />
