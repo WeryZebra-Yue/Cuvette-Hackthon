@@ -206,7 +206,7 @@ function ForumPage({ Session }) {
             ref={Tag1Ref}
             required
             type="text"
-            className="m-1"
+           
             placeholder="#"
             className={ForumPageStyles.forum_page_new_question_popup_input}
           />
@@ -214,7 +214,7 @@ function ForumPage({ Session }) {
             ref={Tag2Ref}
             required
             type="text"
-            className="m-1"
+            
             placeholder="#"
             className={ForumPageStyles.forum_page_new_question_popup_input}
           />
@@ -222,7 +222,7 @@ function ForumPage({ Session }) {
             ref={Tag3Ref}
             required
             type="text"
-            className="m-1"
+           
             placeholder="#"
             className={ForumPageStyles.forum_page_new_question_popup_input}
           />
