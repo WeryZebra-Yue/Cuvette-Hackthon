@@ -9,6 +9,7 @@ import Navbar from "../components/navbar";
 
 import { rdb } from "../firebases";
 import { ref, set } from "@firebase/database";
+import HomePage from "../components/home/HomePage";
 
 export default function Home({ Session }) {
   const [fact, setText] = useState("");
@@ -16,13 +17,11 @@ export default function Home({ Session }) {
   console.log(Session);
   if (!Session) return <LandingPage />;
 
+  set(ref(rdb, "user/" + Session.user.email.split("@")[0]), {
+    username: Session.user.name,
+    image: Session.user.image,
+  });
 
-    set(ref(rdb, "user/" + Session.user.email.split("@")[0]), {
-      username: Session.user.name,
-      image: Session.user.image,
-    });
-  
-  
   const userAction = async () => {
     const response = await fetch(
       "https://uselessfacts.jsph.pl/random.json?language=en"
@@ -31,16 +30,14 @@ export default function Home({ Session }) {
     setText(myJson.text);
   };
 
+  useEffect(() => {
+    userAction();
+  }, []);
+
   return (
-    <div>
-      <Navbar />
-      Home Page
-      <div>Profile Name : {Session.user.name}</div>
-      <div>Profile Image : </div>
-      <Image src={Session.user.image} height={40} width={40} />
-      <div onClick={signOut}>Sign out</div>
-      {fact && <div>{fact}</div>}
-    </div>
+    <>
+      <HomePage Session={Session} fact={fact} />
+    </>
   );
 }
 export async function getServerSideProps(context) {
