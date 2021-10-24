@@ -8,19 +8,27 @@ import addIcon from "../../assets/paths/plus.svg";
 
 import Navbar from "../navbar";
 import LearningPathListComp from "./LearningPathListComp";
+import CreatePathPopUp from "./CreatePathPopUp";
 
-function LearningPathsPage({ userData, pathsData }) {
+function LearningPathsPage({ Session, pathsData }) {
   const tempPathData = Array(5).fill({
     pathID: 1,
-    title: "Learning Path 1",
+    Title: "Learning Path 1",
   });
+
+  const [isCreatePopUpOpen, setIsCreatePopUpOpen] = React.useState(false);
 
   return (
     <div className={learningPathsPageStyles.learning_path_page_primary_wrapper}>
       <div
         className={learningPathsPageStyles.learning_path_page_secondary_wrapper}
       >
-        <div className={learningPathsPageStyles.learning_path_create_button}>
+        <div
+          className={learningPathsPageStyles.learning_path_create_button}
+          onClick={() => {
+            setIsCreatePopUpOpen(true);
+          }}
+        >
           <div
             className={learningPathsPageStyles.learning_path_create_button_icon}
           >
@@ -34,9 +42,9 @@ function LearningPathsPage({ userData, pathsData }) {
           }
         >
           <LearningPathListComp
-            title={"Your Data"}
+            title={"Your paths"}
             isOwner={true}
-            pathsData={tempPathData}
+            pathsData={pathsData}
             onButtonClick={(pathID) => {
               console.log(pathID);
               //delete path
@@ -49,17 +57,24 @@ function LearningPathsPage({ userData, pathsData }) {
           }
         >
           <LearningPathListComp
-            title={"Your Data"}
+            title={"Shared paths"}
             isOwner={false}
             pathsData={tempPathData}
             onButtonClick={(pathID) => {
               console.log(pathID);
-              //delete path
+              //Leave path path
             }}
           />
         </div>
       </div>
-      <Navbar userDetails={userData} />
+      <CreatePathPopUp
+        isOpen={isCreatePopUpOpen}
+        toggleFun={() => {
+          setIsCreatePopUpOpen(!isCreatePopUpOpen);
+        }}
+        Session={Session}
+      />
+      <Navbar userDetails={Session.user} />
     </div>
   );
 }

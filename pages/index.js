@@ -3,13 +3,14 @@ import Image from 'next/image'
 import { getSession, signOut, useSession,getProviders} from 'next-auth/react'
 import Link from 'next/link'
 import SignButton from '../components/SignButton';
+import LandingPage from './../components/landing/Index';
 
 
 export default function Home({Session}) {
   
   console.log(Session)
    if(!Session)return(
-     <SignButton/>
+     <LandingPage/>
   );
    
      

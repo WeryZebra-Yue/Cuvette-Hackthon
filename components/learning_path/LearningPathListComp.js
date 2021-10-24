@@ -24,7 +24,7 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
             >
               <Link href={`/p/${path.pathID}`}>
                 <div className={LearningPathListCompStyles.l_l_list_item_title}>
-                  {path.title}
+                  {path.Title}
                 </div>
               </Link>
               {isOwner ? (
