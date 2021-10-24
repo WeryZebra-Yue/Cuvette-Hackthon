@@ -178,7 +178,16 @@ function IndividualPathPage({
               )
             ) : null}
           </div>
-          <div className={IndividualPathPageStyles.i_p_p_people_wrapper}>
+          <div
+            className={IndividualPathPageStyles.i_p_p_people_wrapper}
+            style={
+              isOwner
+                ? {}
+                : {
+                    marginTop: "0px",
+                  }
+            }
+          >
             <h4 className={IndividualPathPageStyles.i_p_p_people_title}>
               People with access
             </h4>
