@@ -3,3 +3,8 @@ export  const Updates = ()=>{
         type : 'UPDATE'
     }
 }
+export  const Access = ()=>{
+    return {
+        type : 'ACCESS'
+    }
+}

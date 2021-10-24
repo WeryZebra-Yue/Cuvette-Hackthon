@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
 import update from "./update";
-let rootReducer = combineReducers({update})
+import access from "./access"
+let rootReducer = combineReducers({update,access})
 export default rootReducer;

@@ -4,17 +4,15 @@ import Link from "next/link";
 
 import db from '../../firebases'
 import learningPathsPageStyles from "./LearningPathsPage.module.css";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc ,getDocs} from "firebase/firestore";
 import addIcon from "../../assets/paths/plus.svg";
 
 import Navbar from "../navbar";
 import LearningPathListComp from "./LearningPathListComp";
 import CreatePathPopUp from "./CreatePathPopUp";
-function LearningPathsPage({ Session, pathsData }) {
-  const tempPathData = Array(5).fill({
-    pathID: 1,
-    Title: "Learning Path 1",
-  });
+function LearningPathsPage({ Session, pathsData ,SharedPaths}) {
+  
+  
 
   const [isCreatePopUpOpen, setIsCreatePopUpOpen] = React.useState(false);
 
@@ -34,6 +32,7 @@ function LearningPathsPage({ Session, pathsData }) {
           <div
             className={learningPathsPageStyles.learning_path_create_button_icon}
           >
+            
             <Image src={addIcon} layout="responsive" />
           </div>
           Create New
@@ -65,7 +64,7 @@ function LearningPathsPage({ Session, pathsData }) {
           <LearningPathListComp
             title={"Shared paths"}
             isOwner={false}
-            pathsData={tempPathData}
+            pathsData={SharedPaths}
             onButtonClick={(pathID) => {
               console.log(pathID);
               //Leave path path

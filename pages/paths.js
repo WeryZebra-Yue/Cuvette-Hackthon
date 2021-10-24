@@ -17,7 +17,9 @@ import { useSelector } from "react-redux";
 import LearningPathsPage from "../components/learning_path/index";
 function learning({ Session }) {
   const [Paths, setData] = useState([]);
+  const [SharedPaths, setShared] = useState([]);
   let path = [];
+  let Sharedpath = [];
   const UpdateState = useSelector((state) => state.update);
 
   useEffect(() => {
@@ -33,6 +35,18 @@ function learning({ Session }) {
       .then(() => {
         setData(path);
       });
+      const Shared = getDocs(
+        query(
+          collection(db, "path"),
+          where("user", "array-contains", Session.user.email.split("@")[0])
+        )
+      )
+        .then((querySnapshot) => {
+          querySnapshot.forEach((Data) => Sharedpath.push(Data.data()));
+        })
+        .then(() => {
+          setShared(Sharedpath);
+        });
   }, [UpdateState]);
 
   useEffect(() => {
@@ -41,7 +55,11 @@ function learning({ Session }) {
   return (
     <div>
       {/* <AddButton Session={Session} /> */}
-      <LearningPathsPage Session={Session} pathsData={Paths} />
+      {
+      
+        <LearningPathsPage Session={Session} pathsData={Paths} SharedPaths={SharedPaths}/>
+
+      }
     </div>
   );
 }
@@ -49,6 +67,14 @@ function learning({ Session }) {
 export default learning;
 export async function getServerSideProps(context) {
   const Session = await getSession(context);
+  if (!Session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       Session,

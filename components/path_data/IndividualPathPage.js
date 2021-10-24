@@ -13,28 +13,35 @@ import PathDataPageRightPanelButton from "./PathDataPageRightPanelButton";
 
 import updatedTextareaHeight from "./helpers/text_area_height_updater";
 import reactDom from "react-dom";
+import { doc, getDoc, setDoc } from "@firebase/firestore";
+import { db } from "../../firebases";
+import { useDispatch } from "react-redux";
+import { Access } from "../../action";
 
 function IndividualPathPage({
   Session,
   isOwner = true,
+  isShared,
+  Querye,
+  people,
+  pathDatax,
   pathData = {
     Title:
-      "Web dev learning learning Web dev learning Web dev learning Web dev learning ( FrontEnd )",
-    timeline: Array(10).fill({
+    pathDatax.CTitle?pathDatax.CTitle:pathDatax.Title ,
+    timeline: pathDatax.currentTimelineData?pathDatax.currentTimelineData: Array(1).fill({
       title:
-        "Lorem Lorem ipsum sit amet, consectetur adipiscing utipsum sit amet, consectetur adipiscing elit. In mauris elementum ut",
+        "",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mauris elementum ut parturient. Fringilla vulputate dui at ut sed. Vivamus sollicitudin leo bibendum dolor nunc risus, venenatis id. Imperdiet nibh habitasse nunc tortor consequat bibendum duis eget. \nAmet molestie odio tortor facilisi pellentesque in eget lobortis. Sed malesuada sed sed mauris proin sed purus nascetur ut. Lectus interdum tellus urna aliquam facilisi. Et egestas cursus vel pellentesque. Congue amet consectetur integer sed pulvinar in sollicitudin senectus et.",
+        "",
     }),
-    people: Array(10).fill({
-      name: "Abc Xyz",
-      image: Session.user.image,
-      id: "",
-    }),
+   
+   
   },
 }) {
-  const titleRef = React.useRef(123456);
+  
 
+  const titleRef = React.useRef(123456);
+  const dispatch = useDispatch();
   const [isInEditMode, setIsInEditMode] = React.useState(false);
   const [isDataChanged, setIsDataChanged] = React.useState(false);
   const [currentTimelineData, setCurrentTimelineData] = React.useState(
@@ -68,6 +75,10 @@ function IndividualPathPage({
 
   const saveDataChanges = () => {
     console.log("save");
+     setDoc(doc(db,"path",Querye),{currentTimelineData,CTitle:currentTitle},{
+       merge:true
+     })
+     console.log(currentTimelineData)
     setIsInEditMode(false);
   };
 
@@ -94,7 +105,7 @@ function IndividualPathPage({
     });
     setCurrentTimelineData(tempData);
   };
-
+  
   return (
     <div className={IndividualPathPageStyles.i_p_p_primary_wrapper}>
       <div className={IndividualPathPageStyles.i_p_p_timeline_wrapper}>
@@ -110,7 +121,7 @@ function IndividualPathPage({
         />
 
         <div className={IndividualPathPageStyles.i_p_p_timeline_list_wrapper}>
-          {currentTimelineData.map((item, index) => {
+          {(isOwner || isShared) && currentTimelineData.map((item, index) => {
             return (
               <div
                 key={index}
@@ -125,16 +136,16 @@ function IndividualPathPage({
                 />
               </div>
             );
-          })}
+          })} 
         </div>
-        <div
+      { isOwner? (<div
           className={IndividualPathPageStyles.i_p_p_add_button}
           onClick={() => {
             addNewTimelineObj();
           }}
         >
           <Image src={plusButton} layout="responsive" />
-        </div>
+        </div>):null}
       </div>
       <div className={IndividualPathPageStyles.i_p_p_info_wrapper}>
         <div className={IndividualPathPageStyles.i_p_p_info_sub_wrapper}>
@@ -147,17 +158,12 @@ function IndividualPathPage({
                     onClickFun={setToEditMode}
                     color="#87F192"
                   />
-                  <PathDataPageRightPanelButton
-                    name="delete"
-                    onClickFun={() => {
-                      console.log("delete");
-                    }}
-                    color="#FF5D5D"
-                  />
+                
                   <PathDataPageRightPanelButton
                     name="share"
                     onClickFun={() => {
-                      console.log("share");
+                      navigator.clipboard.writeText("Hello worldxxs");
+
                     }}
                     color="#c5c5c5"
                   />
@@ -167,6 +173,7 @@ function IndividualPathPage({
                   <PathDataPageRightPanelButton
                     name="save changes"
                     onClickFun={saveDataChanges}
+                    
                     color={isDataChanged ? "#87F192" : "#c5c5c5"}
                   />
                   <PathDataPageRightPanelButton
@@ -176,7 +183,22 @@ function IndividualPathPage({
                   />
                 </>
               )
-            ) : null}
+            ) :  !isShared ? (<button onClick={()=>{
+              let User = [];
+              getDoc(doc(db,"path",`${Session?.user.email}-${Querye}`)).then((snapshot)=>{
+                User = snapshot.data()?snapshot.data().user:[]
+              }).then(()=>{
+                User.push(Session?.user.email.split('@')[0])
+                setDoc(doc(db,"path",`${Querye}`),{
+                  user :  User
+                },{merge:true}).then(()=>{
+                  dispatch(Access())
+                })
+              })
+               
+            }} >
+              Add to your paths
+             </button>):null}
           </div>
           <div
             className={IndividualPathPageStyles.i_p_p_people_wrapper}
@@ -192,7 +214,7 @@ function IndividualPathPage({
               People with access
             </h4>
             <div className={IndividualPathPageStyles.i_p_p_people_list_wrapper}>
-              {pathData.people.map((item, index) => {
+              { people && people.map((item, index) => {
                 return (
                   <div
                     key={index}
@@ -218,23 +240,11 @@ function IndividualPathPage({
                           IndividualPathPageStyles.i_p_p_person_name_wrapper
                         }
                       >
-                        {item.name}
+                        {item.username}
                       </div>
                     </div>
-                    {isOwner ? (
-                      <div
-                        className={
-                          IndividualPathPageStyles.i_p_p_person_removed_button
-                        }
-                      >
-                        <Image
-                          src={deleteButton}
-                          width={"100%"}
-                          height={"100%"}
-                          layout="responsive"
-                        />
-                      </div>
-                    ) : null}
+                   
+                    
                   </div>
                 );
               })}
@@ -242,7 +252,7 @@ function IndividualPathPage({
           </div>
         </div>
       </div>
-      <Navbar userDetails={Session.user} />
+      <Navbar userDetails={Session?.user} />
     </div>
   );
 }

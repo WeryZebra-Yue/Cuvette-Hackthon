@@ -4,6 +4,10 @@ import { getSession, signOut, useSession,getProviders} from 'next-auth/react'
 import Link from 'next/link'
 import SignButton from '../components/SignButton';
 import LandingPage from './../components/landing/Index';
+import { useEffect } from 'react';
+import { rdb } from '../firebases';
+import { ref, set } from '@firebase/database';
+import Navbar from '../components/navbar';
 
 
 export default function Home({Session}) {
@@ -12,11 +16,17 @@ export default function Home({Session}) {
    if(!Session)return(
      <LandingPage/>
   );
-   
+   useEffect(()=>{
+     set(ref(rdb,'user/'+ Session.user.email.split('@')[0]),{
+      username : Session.user.name,
+      image : Session.user.image 
+    })
+   })
      
  
   return (
     <div>
+      <Navbar/>
     Home Page 
     <div>Profile Name : {Session.user.name}</div> 
      <div>Profile Image : </div>
