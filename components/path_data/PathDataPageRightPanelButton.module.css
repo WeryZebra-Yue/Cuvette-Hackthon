@@ -1,0 +1,19 @@
+.p_p_r_b_primary_wrapper {
+  width: 100%;
+  border-radius: 4px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: grid;
+  place-items: center;
+  border: 2px solid;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s ease-out;
+}
+
+.p_p_r_b_primary_wrapper:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,150 @@
+.i_p_p_primary_wrapper {
+  width: 100%;
+  height: fit-content;
+  min-height: 100vh;
+  background-color: var(--primary-dark-color);
+  padding: 0;
+  margin: 0;
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 80px;
+  display: flex;
+}
+
+.i_p_p_timeline_wrapper {
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.i_p_p_path_title {
+  margin-left: 33px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: white;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-top: 30px;
+}
+
+.i_p_p_timeline_list_wrapper {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.i_p_p_info_wrapper {
+  width: 400px;
+  margin: 0;
+  padding: 0;
+  margin-left: 35px;
+  margin-top: 40px;
+}
+
+.i_p_p_info_sub_wrapper {
+  padding-top: 10px;
+  position: sticky;
+  top: 120px;
+  height: 80vh;
+  padding-left: 35px;
+  border-left: 2px solid white;
+}
+
+.i_p_p_buttons_wrapper {
+  width: 100%;
+}
+
+.i_p_p_buttons_wrapper div {
+  margin-top: 12px;
+}
+
+.i_p_p_buttons_wrapper :first-child {
+  margin-top: 0px;
+}
+
+.i_p_p_people_wrapper {
+  width: 100%;
+  height: 100%;
+  margin-top: 60px;
+}
+
+.i_p_p_people_title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+.i_p_p_people_list_wrapper {
+  width: 100%;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 18px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 25px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+  border-radius: 15px;
+}
+
+.i_p_p_people_list_wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.i_p_p_people_list_wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.i_p_p_person_wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  margin-top: 12px;
+}
+
+.i_p_p_person_wrapper:first-of-type {
+  margin-top: 0;
+}
+
+.i_p_p_person_inner_wrapper {
+  display: flex;
+}
+
+.i_p_p_person_image {
+  height: fit-content;
+  width: 33px;
+  border-radius: 50%;
+  margin-right: 15px;
+  overflow: hidden;
+  outline: 2px solid #ffffff;
+}
+
+.i_p_p_person_name_wrapper {
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.i_p_p_person_removed_button {
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  padding: 7.5px;
+  border-radius: 50%;
+  outline: 1px solid white;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.15s ease-out;
+}
+
+.i_p_p_person_removed_button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
