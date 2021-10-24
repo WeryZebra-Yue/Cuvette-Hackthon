@@ -1,0 +1,53 @@
+.learning_path_page_primary_wrapper {
+  width: 100%;
+  height: fit-content;
+  min-height: 100vh;
+  background-color: var(--primary-dark-color);
+  overflow: hidden;
+  position: relative;
+  padding-top: 80px;
+}
+
+.learning_path_page_secondary_wrapper {
+  padding-left: 36px;
+  padding-right: 36px;
+  padding-top: 26px;
+  padding-bottom: 35px;
+  width: 100%;
+}
+
+.learning_path_create_button {
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-bottom: 13px;
+  padding-top: 13px;
+  border: 1px solid white;
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: white;
+  font-size: 18px;
+  transition: background 0.15s ease-out;
+}
+
+.learning_path_create_button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.learning_path_create_button_icon {
+  width: 18px;
+  margin-right: 13px;
+}
+
+.learning_paths_page_users_paths_wrapper,
+.learning_paths_page_shared_paths_wrapper {
+  width: 100%;
+  height: fit-content;
+  margin-top: 26px;
+}
