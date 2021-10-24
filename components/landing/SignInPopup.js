@@ -33,7 +33,7 @@ function SignInPopup({ isPopupOpen, toggleFunction }) {
                 layout="responsive"
               />
             </div>
-            Sign in with Google
+            With Google
           </div>
         </div>
       </Modal>
