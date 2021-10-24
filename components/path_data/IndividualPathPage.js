@@ -8,6 +8,7 @@ import TimelineObjComp from "./TimelineObjComp";
 import PathDataPageRightPanelButton from "./PathDataPageRightPanelButton";
 
 import deleteButton from "../../assets/paths/delete.svg";
+import plusButton from "../../assets/paths/plus_t.svg";
 
 function IndividualPathPage({
   Session,
@@ -57,6 +58,24 @@ function IndividualPathPage({
     setCurrentTimelineData(tempData);
   };
 
+  const addNewTimelineObj = () => {
+    setIsInEditMode(true);
+
+    let tempData = currentTimelineData.slice();
+
+    if (
+      tempData[tempData.length - 1].title === "" ||
+      tempData[tempData.length - 1].description === ""
+    ) {
+      return;
+    }
+    tempData.push({
+      title: "",
+      description: "",
+    });
+    setCurrentTimelineData(tempData);
+  };
+
   return (
     <div className={IndividualPathPageStyles.i_p_p_primary_wrapper}>
       <div className={IndividualPathPageStyles.i_p_p_timeline_wrapper}>
@@ -80,6 +99,14 @@ function IndividualPathPage({
               </div>
             );
           })}
+        </div>
+        <div
+          className={IndividualPathPageStyles.i_p_p_add_button}
+          onClick={() => {
+            addNewTimelineObj();
+          }}
+        >
+          <Image src={plusButton} layout="responsive" />
         </div>
       </div>
       <div className={IndividualPathPageStyles.i_p_p_info_wrapper}>

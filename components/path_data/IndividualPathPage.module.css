@@ -47,7 +47,22 @@
   padding-left: 35px;
   border-left: 2px solid white;
 }
+.i_p_p_add_button {
+  width: 50px;
+  height: 50px;
+  padding: 15px;
+  border-radius: 25%;
+  margin: auto;
+  margin-top: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
+  transition: background 0.15s ease-out;
+  cursor: pointer;
+}
 
+.i_p_p_add_button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
 .i_p_p_buttons_wrapper {
   width: 100%;
 }
