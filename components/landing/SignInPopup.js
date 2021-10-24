@@ -1,30 +1,40 @@
 import React from "react";
+import Image from "next/image";
 import { signIn } from "next-auth/react";
 
-import { Button, Card, CardHeader, Modal, Row, Col } from "reactstrap";
+import SignInPopupStyles from "./SignInPopup.module.css";
+
+import { Modal } from "reactstrap";
+
+import googlelogo from "../../assets/landing/google.svg";
 
 function SignInPopup({ isPopupOpen, toggleFunction }) {
   return (
     <div>
-      <Modal isOpen={isPopupOpen} toggle={toggleFunction}>
-        <div className=" modal-body p-0">
-          <Card className=" bg-secondary shadow border-0">
-            <CardHeader className=" bg-white pb-5">
-              <div className=" text-muted text-center mb-3">
-                <small>Sign in with</small>
-              </div>
-              <div className=" btn-wrapper text-center">
-                <Button
-                  className=" btn-neutral btn-icon"
-                  color="default"
-                  onClick={() => signIn("google", { callbackUrl: "/" })}
-                >
-                  <span className=" btn-inner--icon"></span>
-                  <span className=" btn-inner--text">Google</span>
-                </Button>
-              </div>
-            </CardHeader>
-          </Card>
+      <Modal
+        isOpen={isPopupOpen}
+        toggle={toggleFunction}
+        centered={true}
+        className={SignInPopupStyles.sign_in_popup}
+      >
+        <div className={SignInPopupStyles.s_p_primary_wrapper}>
+          <div className={SignInPopupStyles.s_p_sign_in_with_text}>
+            Sign in Options
+          </div>
+          <div
+            className={SignInPopupStyles.sign_in_wih_google_button}
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+          >
+            <div className={SignInPopupStyles.s_p_google_logo_wrapper}>
+              <Image
+                width={"100%"}
+                height={"100%"}
+                src={googlelogo}
+                layout="responsive"
+              />
+            </div>
+            Sign in with Google
+          </div>
         </div>
       </Modal>
     </div>
