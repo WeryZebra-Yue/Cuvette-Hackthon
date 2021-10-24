@@ -235,8 +235,45 @@ function IndividualPathPage({
             <div className={IndividualPathPageStyles.i_p_p_people_list_wrapper}>
               {people &&
                 people.map((item, index) => {
-                  return (
-                    <div
+                  if(index==0){
+                    return(
+                      <div
+                      key={index}
+                      className={IndividualPathPageStyles.i_p_p_person_wrapper}
+                    >
+                      <div
+                        className={
+                          IndividualPathPageStyles.i_p_p_person_inner_wrapper
+                        }
+                      >
+                        <div
+                          className={
+                            IndividualPathPageStyles.i_p_p_person_image
+                          }
+                        >
+                          <Image
+                            src={item.image}
+                            width={"100%"}
+                            height={"100%"}
+                            layout="responsive"
+                          />
+                        </div>
+                        <div
+                          className={
+                            IndividualPathPageStyles.i_p_p_person_name_wrapper
+                          }
+                          
+                        >
+                          {item.username} 👑
+                        </div>
+                      </div>
+                    </div>
+                    )
+                  }
+                  else{
+
+                    return (
+                      <div
                       key={index}
                       className={IndividualPathPageStyles.i_p_p_person_wrapper}
                     >
@@ -267,9 +304,10 @@ function IndividualPathPage({
                       </div>
                     </div>
                   );
+                }
                 })}
-            </div>
-          </div>
+                </div>
+                </div>
         </div>
       </div>
       <Navbar userDetails={Session?.user} />

@@ -76,6 +76,7 @@ function QuestionPage({
         }}
       >
         <textarea
+        required
           type="text"
           name="answer"
           ref = {TextRef}
