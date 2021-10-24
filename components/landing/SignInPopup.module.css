@@ -7,29 +7,13 @@
   flex-direction: column;
   border-radius: 3px;
   background-color: var(--primary-dark-color);
-  border: 3px solid white;
+  outline: 3px solid white;
 }
 
 .sign_in_popup {
- width: fit-content;
+  width: fit-content;
   background: transparent;
   border-radius: 0;
-}
-@media only screen and (max-width: 575px) {
-  .sign_in_popup{
-   width: 80%!important;
-   padding-left: 20%;
-  
- }
- .s_p_sign_in_with_text{
-  font-size: 15px!important;
-}
-.sign_in_wih_google_button{
-  /* content: 'Google'; */
-  font-size: 15px!important;
-  text-align: center;
-
-}
 }
 .sign_in_wih_google_button,
 .s_p_sign_in_with_text {
@@ -61,4 +45,25 @@
   width: 20px;
   height: 20px;
   margin-right: 10px;
+}
+
+@media only screen and (max-width: 575px) {
+  .sign_in_popup {
+    width: 80% !important;
+    padding-left: 20%;
+  }
+  .s_p_sign_in_with_text {
+    font-size: 15px !important;
+  }
+  .sign_in_wih_google_button {
+    font-size: 15px !important;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .sign_in_popup {
+    width: 90% !important;
+    padding-left: 4.5%;
+  }
 }
