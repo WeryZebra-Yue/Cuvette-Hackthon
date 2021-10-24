@@ -216,7 +216,7 @@ function ForumPage({ Session }) {
             type="text"
             className="m-1"
             placeholder="#"
-            className={ForumPageStyles.forum_page_new_question_popup_input1}
+            className={ForumPageStyles.forum_page_new_question_popup_input}
           />
           <input
             ref={Tag3Ref}
@@ -224,7 +224,7 @@ function ForumPage({ Session }) {
             type="text"
             className="m-1"
             placeholder="#"
-            className={ForumPageStyles.forum_page_new_question_popup_input2}
+            className={ForumPageStyles.forum_page_new_question_popup_input}
           />
           <button
             type="submit"
