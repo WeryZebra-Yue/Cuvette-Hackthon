@@ -60,7 +60,7 @@ function IndividualPathPage({
   useEffect(() => {
     setIsDataChanged(
       !(
-        currentTimelineData === pathData.timeline ||
+        currentTimelineData === pathData.timeline &&
         currentTitle === pathData.Title
       )
     );
