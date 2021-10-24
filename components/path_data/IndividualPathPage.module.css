@@ -17,6 +17,11 @@
 }
 
 .i_p_p_path_title {
+  width: 100%;
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  border-radius: none;
   margin-left: 33px;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;

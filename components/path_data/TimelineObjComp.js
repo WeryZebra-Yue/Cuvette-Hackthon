@@ -3,6 +3,8 @@ import reactDom from "react-dom";
 
 import TimelineObjCompStyles from "./TimelineObjComp.module.css";
 
+import updatedTextareaHeight from "./helpers/text_area_height_updater";
+
 function TimelineObjComp({
   title,
   description,
@@ -21,20 +23,13 @@ function TimelineObjComp({
   useEffect(() => {
     console.log(title);
     reactDom.findDOMNode(titleRef.current).value = title;
-    setTimeout(() => {
       updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
-    }, 100);
   }, [title]);
 
   useEffect(() => {
     reactDom.findDOMNode(descriptionRef.current).value = description;
     updatedTextareaHeight(reactDom.findDOMNode(descriptionRef.current));
   }, [description]);
-
-  function updatedTextareaHeight(textAreaElement) {
-    textAreaElement.style.height = "";
-    textAreaElement.style.height = textAreaElement.scrollHeight + "px";
-  }
 
   function handleDataChange() {
     dataChangeFun(keyindex, {

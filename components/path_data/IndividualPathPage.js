@@ -3,18 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 
 import IndividualPathPageStyles from "./IndividualPathPage.module.css";
+
+import deleteButton from "../../assets/paths/delete.svg";
+import plusButton from "../../assets/paths/plus_t.svg";
+
 import Navbar from "../navbar";
 import TimelineObjComp from "./TimelineObjComp";
 import PathDataPageRightPanelButton from "./PathDataPageRightPanelButton";
 
-import deleteButton from "../../assets/paths/delete.svg";
-import plusButton from "../../assets/paths/plus_t.svg";
+import updatedTextareaHeight from "./helpers/text_area_height_updater";
+import reactDom from "react-dom";
 
 function IndividualPathPage({
   Session,
   isOwner = true,
   pathData = {
-    Title: "Web dev learning ( FrontEnd )",
+    Title:
+      "Web dev learning learning Web dev learning Web dev learning Web dev learning ( FrontEnd )",
     timeline: Array(10).fill({
       title:
         "Lorem Lorem ipsum sit amet, consectetur adipiscing utipsum sit amet, consectetur adipiscing elit. In mauris elementum ut",
@@ -28,21 +33,35 @@ function IndividualPathPage({
     }),
   },
 }) {
+  const titleRef = React.useRef(123456);
+
   const [isInEditMode, setIsInEditMode] = React.useState(false);
   const [isDataChanged, setIsDataChanged] = React.useState(false);
   const [currentTimelineData, setCurrentTimelineData] = React.useState(
     pathData.timeline
   );
+  const [currentTitle, setCurrentTitle] = React.useState(pathData.Title);
 
   useEffect(() => {
-    setIsDataChanged(!(currentTimelineData === pathData.timeline));
-  }, [currentTimelineData]);
+    reactDom.findDOMNode(titleRef.current).value = currentTitle;
+    updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
+  }, [currentTitle]);
+
+  useEffect(() => {
+    setIsDataChanged(
+      !(
+        currentTimelineData === pathData.timeline ||
+        currentTitle === pathData.Title
+      )
+    );
+  }, [currentTimelineData, currentTitle]);
 
   const setToEditMode = () => {
     setIsInEditMode(true);
   };
 
   const resetFun = () => {
+    setCurrentTitle(pathData.Title);
     setCurrentTimelineData(pathData.timeline);
     setIsInEditMode(false);
   };
@@ -79,9 +98,17 @@ function IndividualPathPage({
   return (
     <div className={IndividualPathPageStyles.i_p_p_primary_wrapper}>
       <div className={IndividualPathPageStyles.i_p_p_timeline_wrapper}>
-        <h2 className={IndividualPathPageStyles.i_p_p_path_title}>
-          {pathData.Title}
-        </h2>
+        <textarea
+          className={IndividualPathPageStyles.i_p_p_path_title}
+          onChange={(e) => {
+            updatedTextareaHeight(e.target);
+            setCurrentTitle(e.target.value);
+          }}
+          disabled={!isInEditMode}
+          ref={titleRef}
+          defaultValue={currentTitle}
+        />
+
         <div className={IndividualPathPageStyles.i_p_p_timeline_list_wrapper}>
           {currentTimelineData.map((item, index) => {
             return (
