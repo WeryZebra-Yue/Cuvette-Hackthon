@@ -9,7 +9,5 @@ export default NextAuth({
     }),
   ],
   
- pages:{
-     signIn :"/" 
- }
+
 })

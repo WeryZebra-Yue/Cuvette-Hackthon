@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import reactDom from "react-dom";
-import { Card, CardHeader, Modal } from "reactstrap";
+
+import {  Modal } from "reactstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import ForumPageStyles from "./ForumPage.module.css";
@@ -206,7 +206,7 @@ function ForumPage({ Session }) {
             ref={Tag1Ref}
             required
             type="text"
-            className="m-1"
+           
             placeholder="#"
             className={ForumPageStyles.forum_page_new_question_popup_input}
           />
@@ -214,17 +214,17 @@ function ForumPage({ Session }) {
             ref={Tag2Ref}
             required
             type="text"
-            className="m-1"
+            
             placeholder="#"
-            className={ForumPageStyles.forum_page_new_question_popup_input1}
+            className={ForumPageStyles.forum_page_new_question_popup_input}
           />
           <input
             ref={Tag3Ref}
             required
             type="text"
-            className="m-1"
+           
             placeholder="#"
-            className={ForumPageStyles.forum_page_new_question_popup_input2}
+            className={ForumPageStyles.forum_page_new_question_popup_input}
           />
           <button
             type="submit"
