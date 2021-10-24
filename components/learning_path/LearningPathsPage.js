@@ -64,6 +64,7 @@ function LearningPathsPage({ Session, pathsData ,SharedPaths}) {
           <LearningPathListComp
             title={"Shared paths"}
             isOwner={false}
+            Session = {Session}
             pathsData={SharedPaths}
             onButtonClick={(pathID) => {
               console.log(pathID);
