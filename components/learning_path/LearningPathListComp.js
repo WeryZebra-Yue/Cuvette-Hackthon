@@ -22,16 +22,18 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
                   index === pathsData.length - 1 ? "none" : "1px solid #e6e6e6",
               }}
             >
-              <h5 className={LearningPathListCompStyles.l_l_list_item_title}>
-                {path.title}
-              </h5>
+              <Link href={`/p/${path.pathID}`}>
+                <div className={LearningPathListCompStyles.l_l_list_item_title}>
+                  {path.title}
+                </div>
+              </Link>
               {isOwner ? (
                 <div
                   className={
                     LearningPathListCompStyles.l_l_list_item_delete_button
                   }
                   onClick={() => {
-                    onButtonClick(pathsData.pathID);
+                    onButtonClick(path.pathID);
                   }}
                 >
                   <Image src={deleteButton} fill="responsive" />
@@ -42,7 +44,7 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
                     LearningPathListCompStyles.l_l_list_item_leave_button
                   }
                   onClick={() => {
-                    onButtonClick(pathsData.pathID);
+                    onButtonClick(path.pathID);
                   }}
                 >
                   <Image src={leaveButton} fill="responsive" />

@@ -11,7 +11,7 @@ import LearningPathListComp from "./LearningPathListComp";
 
 function LearningPathsPage({ userData, pathsData }) {
   const tempPathData = Array(5).fill({
-    id: 1,
+    pathID: 1,
     title: "Learning Path 1",
   });
 
