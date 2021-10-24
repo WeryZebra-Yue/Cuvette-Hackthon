@@ -11,11 +11,26 @@
 }
 
 .sign_in_popup {
-  width: fit-content;
+ width: fit-content;
   background: transparent;
   border-radius: 0;
 }
+@media only screen and (max-width: 575px) {
+  .sign_in_popup{
+   width: 80%!important;
+   padding-left: 20%;
+  
+ }
+ .s_p_sign_in_with_text{
+  font-size: 15px!important;
+}
+.sign_in_wih_google_button{
+  /* content: 'Google'; */
+  font-size: 15px!important;
+  text-align: center;
 
+}
+}
 .sign_in_wih_google_button,
 .s_p_sign_in_with_text {
   color: white;

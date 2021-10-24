@@ -38,11 +38,42 @@
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: fit-content;
+  height: 90vh;
   /* position: relative; */
   /* height: 90vh; */
 }
+@media only screen and (max-width: 680px) {
+  .landing_title{
+    font-size: 20px!important;
+    text-align: center;
+  }
+  .sign_in_button{
+    padding: 6px;
+    font-size: 12px;
+    padding-left: 6px;
+    padding-right: 10px;
+    right: 10px;
+  }
+  .landing_start_learning_now_button{
+    font-size: 15px!important;
 
+  }
+}
+@media only screen and (max-width: 360px) {
+  .landing_title{
+    font-size: 15px!important;
+    text-align: center;
+    padding: 12px;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+  }
+  .landing_start_learning_now_button{
+    font-size: 15px!important;
+    padding: 12px;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+  }
+}
 .landing_title {
   color: white;
   font-size: 35px;
@@ -51,7 +82,16 @@
   text-transform: uppercase;
   margin-top: 100px;
 }
-
+.left_svg{
+  position: absolute;
+  left: -200px;
+  top: 0;
+}
+.right_svg{
+  position: absolute;
+  right: 200px;
+  bottom: 0;
+}
 .landing_start_learning_now_button {
   color: white;
   font-size: 18px;

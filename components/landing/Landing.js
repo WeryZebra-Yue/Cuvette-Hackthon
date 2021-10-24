@@ -5,7 +5,8 @@ import Link from "next/link";
 import landingPageStyle from "./landing.module.css";
 
 import logo from "../../assets/_logo/logo.svg";
-import landingPrimaryGraphic from "../../assets/landing/graphic.svg";
+import g1 from '../../assets/landing/graphic1.svg'
+import g2 from '../../assets/landing/graphic2.svg'
 
 import SignInPopup from "./SignInPopup";
 
@@ -14,6 +15,8 @@ function LandingPage() {
 
   return (
     <div className={landingPageStyle.landing_primary_wrapper}>
+      <Image src={g1} className={landingPageStyle.left_svg}/>
+      <Image src={g2} className={landingPageStyle.right_svg}/>
       <nav className={landingPageStyle.landing_nav}>
         <Link href="/">
           <div className={landingPageStyle.landing_nav_logo}>
@@ -37,9 +40,7 @@ function LandingPage() {
         >
           Start learning now
         </div>
-        <div className={landingPageStyle.landing_primary_graphic}>
-          <Image src={landingPrimaryGraphic} layout="responsive" />
-        </div>
+       
       </div>
 
       <SignInPopup
