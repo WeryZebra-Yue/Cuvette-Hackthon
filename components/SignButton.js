@@ -17,11 +17,8 @@ import {
   Col,
 } from "reactstrap";
 function SignButton() {
-        console.log(provider_id)
-    const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
-  const [modalNotificationOpen, setModalNotificationOpen] = React.useState(
-    false
-  );
+     
+ 
   const [modalFormOpen, setModalFormOpen] = React.useState(false);
     return (
    <>

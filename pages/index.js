@@ -7,10 +7,9 @@ import SignButton from '../components/SignButton';
 
 export default function Home({Session}) {
   
-  
+  console.log(Session)
    if(!Session)return(
-    
-    <SignButton/>
+     <SignButton/>
   );
    
      
@@ -25,5 +24,12 @@ export default function Home({Session}) {
     </div>
   )
 }
-
+export async function getServerSideProps(context){
+  const Session = await getSession(context);
+  return {
+    props:{
+      Session
+    }
+  }
+} 
 
