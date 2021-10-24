@@ -20,6 +20,7 @@ a {
 
 :root {
   --primary-dark-color: #36323d;
+  --max-width-of-question-page-content: 1000px;
 }
 
 .bg_change_hover {
