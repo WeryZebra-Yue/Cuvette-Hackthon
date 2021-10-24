@@ -7,7 +7,7 @@ import CreatePathPopUpStyles from "./CreatePathPopUp.module.css";
 import { db } from "../../firebases";
 import { doc, setDoc } from "firebase/firestore";
 
-import { Card, CardHeader, Modal } from "reactstrap";
+import { Modal } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { Updates } from "../../action";
 
@@ -40,7 +40,9 @@ function CreatePathPopUp({ isOpen, toggleFun, Session }) {
       centered={true}
       className={CreatePathPopUpStyles.create_path_popup_primary_wrapper}
     >
-      <div className={CreatePathPopUpStyles.create_path_popup_secondary_wrapper}>
+      <div
+        className={CreatePathPopUpStyles.create_path_popup_secondary_wrapper}
+      >
         <div className={CreatePathPopUpStyles.create_path_popup_title}>
           Create a new path
         </div>
