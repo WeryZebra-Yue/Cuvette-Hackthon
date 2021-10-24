@@ -42,38 +42,6 @@
   /* position: relative; */
   /* height: 90vh; */
 }
-@media only screen and (max-width: 680px) {
-  .landing_title{
-    font-size: 20px!important;
-    text-align: center;
-  }
-  .sign_in_button{
-    padding: 6px;
-    font-size: 12px;
-    padding-left: 6px;
-    padding-right: 10px;
-    right: 10px;
-  }
-  .landing_start_learning_now_button{
-    font-size: 15px!important;
-
-  }
-}
-@media only screen and (max-width: 360px) {
-  .landing_title{
-    font-size: 15px!important;
-    text-align: center;
-    padding: 12px;
-    padding-left: 10px!important;
-    padding-right: 10px!important;
-  }
-  .landing_start_learning_now_button{
-    font-size: 15px!important;
-    padding: 12px;
-    padding-left: 10px!important;
-    padding-right: 10px!important;
-  }
-}
 .landing_title {
   color: white;
   font-size: 35px;
@@ -81,16 +49,18 @@
   font-weight: 400;
   text-transform: uppercase;
   margin-top: 100px;
+  z-index: 1;
 }
-.left_svg{
+.landing_graphic2 {
+  width: 250px;
   position: absolute;
-  left: -200px;
-  top: 0;
+  left: -30px;
 }
-.right_svg{
+.landing_graphic1 {
+  width: 250px;
   position: absolute;
-  right: 200px;
-  bottom: 0;
+  right: 0px;
+  bottom: 12vh;
 }
 .landing_start_learning_now_button {
   color: white;
@@ -103,10 +73,52 @@
   padding-right: 45px;
   border-radius: 4px;
   margin-top: 90px;
+  z-index: 1;
 }
 
 .landing_primary_graphic {
   position: absolute;
   bottom: 30px;
   width: 1200px;
+}
+
+@media only screen and (max-width: 680px) {
+  .landing_title {
+    font-size: 24px;
+    text-align: center;
+    width: 250px;
+  }
+  .sign_in_button {
+    padding: 8px;
+    font-size: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    right: 15px;
+    margin-top: 5px;
+  }
+  .landing_nav_logo {
+    width: 80px;
+    position: absolute;
+    left: 20px;
+    margin-top: 6px;
+  }
+  .landing_start_learning_now_button {
+    font-size: 15px;
+    padding: 8px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 80px;
+  }
+  .landing_graphic2 {
+    width: 150px;
+    position: absolute;
+    left: 0px;
+    top: 11vh;
+  }
+  .landing_graphic1 {
+    width: 180px;
+    position: absolute;
+    right: 0px;
+    bottom: 5vh;
+  }
 }
