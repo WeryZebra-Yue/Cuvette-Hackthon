@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import ForumPage from "./../components/forum/";
+import ForumPage from "./../components/forum/ForumPage";
 
 export default function forum({ Session }) {
   return (

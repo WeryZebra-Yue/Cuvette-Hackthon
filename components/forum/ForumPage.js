@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import reactDom from "react-dom";
-import { Card, CardHeader, Modal } from "reactstrap";
+
+import {  Modal } from "reactstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import ForumPageStyles from "./ForumPage.module.css";
