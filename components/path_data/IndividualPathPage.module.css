@@ -21,6 +21,8 @@
   background-color: transparent;
   text-decoration: none;
   border: none;
+  resize: none;
+  overflow: hidden;
   border-radius: none;
   margin-left: 33px;
   font-family: "Montserrat", sans-serif;
