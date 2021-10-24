@@ -159,10 +159,10 @@ function IndividualPathPage({
                     color="#87F192"
                   />
                 
-                  <PathDataPageRightPanelButton
+                  <PathDataPageRightPanelButton 
                     name="share"
                     onClickFun={() => {
-                      navigator.clipboard.writeText("Hello worldxxs");
+                      navigator.clipboard.writeText(`localhost:3000/p/${Querye}`);
 
                     }}
                     color="#c5c5c5"

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import reactDom from "react-dom";
-
+// import learningPathsPageStyles from '../learning_path/learningPathsPageStyles.module.css'
 import ForumPageStyles from "./ForumPage.module.css";
 
 import searchIcon from "../../assets/forum/search.svg";
@@ -31,6 +31,12 @@ function ForumPage({
 
   return (
     <div className={ForumPageStyles.forum_page_primary_wrapper}>
+       <div
+          className={ForumPageStyles.learning_path_create_button}
+          onClick={() => {
+            setIsCreatePopUpOpen(true);
+          }}
+        >New question</div>
       <Navbar userDetails={Session.user} />
       <div className={ForumPageStyles.forum_page_upper_sec_wrapper}>
         <form
