@@ -2,24 +2,26 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { Updates } from "../../action";
+import { Card, CardHeader, Modal } from "reactstrap";
+
 import deleteButton from "../../assets/paths/delete.svg";
 import leaveButton from "../../assets/paths/leave.svg";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Card, CardHeader, Modal } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import LearningPathListCompStyles from "./LearningPathListComp.module.css";
+
+import { Updates } from "../../action";
+
 import { deleteDoc, doc } from "@firebase/firestore";
 import { db } from "../../firebases";
 
 function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
   const dispatch = useDispatch();
-  const [DeletePath,setDeletePath] = useState(null);
+  const [DeletePath, setDeletePath] = useState(null);
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = React.useState(false);
 
   return (
     <div className={LearningPathListCompStyles.l_l_primary_wrapper}>
-      
       <h4 className={LearningPathListCompStyles.l_l_title}>{title}</h4>
       <div className={LearningPathListCompStyles.l_l_list_wrapper}>
         {pathsData?.map((path, index) => {
@@ -42,17 +44,18 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
                   className={
                     LearningPathListCompStyles.l_l_list_item_delete_button
                   }
-                  onClick={() => {
-                  
-                  }}
+                  onClick={() => {}}
                 >
-                  <Image src={deleteButton} fill="responsive" onClick={()=>{
+                  <Image
+                    src={deleteButton}
+                    fill="responsive"
+                    onClick={() => {
                       //
-                      setDeletePath(`${path.email}-${path.Title}`)
-                      setIsDeletePopUpOpen(true)
-                      console.log("Suuu?")
-                
-                  }}/>
+                      setDeletePath(`${path.email}-${path.Title}`);
+                      setIsDeletePopUpOpen(true);
+                      console.log("Suuu?");
+                    }}
+                  />
                 </div>
               ) : (
                 <div
@@ -70,39 +73,54 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
           );
         })}
       </div>
-      <Modal isOpen={isDeletePopUpOpen} toggle={() =>{
-          setIsDeletePopUpOpen(!isDeletePopUpOpen)
-      }}>
-      <div className=" modal-body p-0">
-        <Card className=" bg-secondary shadow border-0">
-          <CardHeader className=" bg-white pb-5">
-            <div className=" text-muted text-center mb-3">
-              
-                <small>Are you sure about that ?</small>
-                <br/  >
-                <button 
-                onClick={()=>{
-                
-                    deleteDoc(doc(db,"path",DeletePath));
-                    setDeletePath(null)
-                    dispatch(Updates())
-                  
-                 
-                  setIsDeletePopUpOpen(false)
-                }
-                }>Yes</button>
-                <br/>
-                <button onClick={()=>{
-                  setDeletePath(null)
-               
-                  setIsDeletePopUpOpen(false)
-                }
-                }>No</button>
+      <Modal
+        isOpen={isDeletePopUpOpen}
+        toggle={() => {
+          setIsDeletePopUpOpen(!isDeletePopUpOpen);
+        }}
+        centered={true}
+        className={LearningPathListCompStyles.l_l_delete_popup_primary_wrapper}
+      >
+        <div
+          className={
+            LearningPathListCompStyles.l_l_delete_popup_secondary_wrapper
+          }
+        >
+          <div className={LearningPathListCompStyles.l_l_delete_popup_title}>
+            Are you sure you want to delete this path ?
+            <div
+              onClick={() => {
+                deleteDoc(doc(db, "path", DeletePath));
+                setDeletePath(null);
+                dispatch(Updates());
+
+                setIsDeletePopUpOpen(false);
+              }}
+              className={
+                LearningPathListCompStyles.l_l_delete_popup_yes_button +
+                " " +
+                LearningPathListCompStyles.l_l_delete_popup_button
+              }
+            >
+              Yes
             </div>
-          </CardHeader>
-        </Card>
-      </div>
-    </Modal>
+            <div
+              onClick={() => {
+                setDeletePath(null);
+
+                setIsDeletePopUpOpen(false);
+              }}
+              className={
+                LearningPathListCompStyles.l_l_delete_popup_no_button +
+                " " +
+                LearningPathListCompStyles.l_l_delete_popup_button
+              }
+            >
+              No
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

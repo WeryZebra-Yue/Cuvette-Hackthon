@@ -66,3 +66,46 @@
 .l_l_list_item_leave_button:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+.l_l_delete_popup_primary_wrapper {
+  width: fit-content;
+  background: transparent;
+  border-radius: 0;
+}
+.l_l_delete_popup_secondary_wrapper {
+  padding: 25px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 3px;
+  background-color: var(--primary-dark-color);
+  border: 3px solid white;
+}
+
+.l_l_delete_popup_title,
+.l_l_delete_popup_button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: white;
+  font-size: 18px;
+}
+.l_l_delete_popup_title {
+  width: 250px;
+}
+
+.l_l_delete_popup_button {
+  padding: 10px;
+  text-align: center;
+  margin-top: 15px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid white;
+  transition: background 0.15s ease-out;
+  cursor: pointer;
+}
+
+.l_l_delete_popup_button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
