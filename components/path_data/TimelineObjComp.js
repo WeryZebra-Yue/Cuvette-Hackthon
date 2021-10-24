@@ -19,25 +19,25 @@ function TimelineObjComp({
   const windowWidth = useMediaQuery();
 
   useEffect(() => {
-    updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
-    updatedTextareaHeight(reactDom.findDOMNode(descriptionRef.current));
+    updatedTextareaHeight((titleRef.current));
+    updatedTextareaHeight((descriptionRef.current));
   }, [windowWidth]);
 
   useEffect(() => {
     console.log(title);
-    reactDom.findDOMNode(titleRef.current).value = title;
-    updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
+    (titleRef.current).value = title;
+    updatedTextareaHeight((titleRef.current));
   }, [title]);
 
   useEffect(() => {
-    reactDom.findDOMNode(descriptionRef.current).value = description;
-    updatedTextareaHeight(reactDom.findDOMNode(descriptionRef.current));
+    (descriptionRef.current).value = description;
+    updatedTextareaHeight((descriptionRef.current));
   }, [description]);
 
   function handleDataChange() {
     dataChangeFun(keyindex, {
-      title: reactDom.findDOMNode(titleRef.current).value,
-      description: reactDom.findDOMNode(descriptionRef.current).value,
+      title: (titleRef.current).value,
+      description: (descriptionRef.current).value,
     });
   }
 

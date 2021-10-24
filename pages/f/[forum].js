@@ -6,7 +6,7 @@ import { db } from "../../firebases";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-function forum({ Session }) {
+function Forum({ Session }) {
   const router = useRouter();
   const [data,setData] = useState(null);
   const State = useSelector(state=>state.updates)
@@ -51,4 +51,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
-export default forum;
+export default Forum;

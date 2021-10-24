@@ -49,12 +49,12 @@ function IndividualPathPage({
   const windowWidth = useMediaQuery();
 
   useEffect(() => {
-    reactDom.findDOMNode(titleRef.current).value = currentTitle;
-    updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
+    titleRef.current.value = currentTitle;
+    updatedTextareaHeight(titleRef.current);
   }, [currentTitle]);
 
   useEffect(() => {
-    updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
+    updatedTextareaHeight(titleRef.current);
   }, [windowWidth]);
 
   useEffect(() => {

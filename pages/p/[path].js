@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import IndividualPathPage from "../../components/path_data/IndividualPathPage";
 import { db, rdb } from "../../firebases";
 
-function path({ Session }) {
+function Path({ Session }) {
   const router = useRouter();
   const [query, setquery] = useState(null);
   const [Share, setShare] = useState(null);
@@ -102,4 +102,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default path;
+export default Path;

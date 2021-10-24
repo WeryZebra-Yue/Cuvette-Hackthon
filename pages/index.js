@@ -16,13 +16,13 @@ export default function Home({ Session }) {
   console.log(Session);
   if (!Session) return <LandingPage />;
 
-  useEffect(() => {
+
     set(ref(rdb, "user/" + Session.user.email.split("@")[0]), {
       username: Session.user.name,
       image: Session.user.image,
     });
     userAction();
-  }, []);
+  
   const userAction = async () => {
     const response = await fetch(
       "https://uselessfacts.jsph.pl/random.json?language=en"

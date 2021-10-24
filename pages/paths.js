@@ -15,7 +15,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { query } from "@firebase/database";
 import { useSelector } from "react-redux";
 import LearningPathsPage from "../components/learning_path/index";
-function learning({ Session }) {
+function Paths({ Session }) {
   const [Paths, setData] = useState([]);
   const [SharedPaths, setShared] = useState([]);
   let path = [];
@@ -56,7 +56,7 @@ function learning({ Session }) {
     <div>
       {/* <AddButton Session={Session} /> */}
       {
-      
+        Session &&
         <LearningPathsPage Session={Session} pathsData={Paths} SharedPaths={SharedPaths}/>
 
       }
@@ -64,7 +64,7 @@ function learning({ Session }) {
   );
 }
 
-export default learning;
+export default Paths;
 export async function getServerSideProps(context) {
   const Session = await getSession(context);
   if (!Session) {
