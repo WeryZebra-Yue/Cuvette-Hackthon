@@ -2,14 +2,14 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import db from '../../firebases'
 import learningPathsPageStyles from "./LearningPathsPage.module.css";
-
+import { doc, deleteDoc } from "firebase/firestore";
 import addIcon from "../../assets/paths/plus.svg";
 
 import Navbar from "../navbar";
 import LearningPathListComp from "./LearningPathListComp";
 import CreatePathPopUp from "./CreatePathPopUp";
-
 function LearningPathsPage({ Session, pathsData }) {
   const tempPathData = Array(5).fill({
     pathID: 1,
@@ -18,8 +18,10 @@ function LearningPathsPage({ Session, pathsData }) {
 
   const [isCreatePopUpOpen, setIsCreatePopUpOpen] = React.useState(false);
 
+
   return (
     <div className={learningPathsPageStyles.learning_path_page_primary_wrapper}>
+      
       <div
         className={learningPathsPageStyles.learning_path_page_secondary_wrapper}
       >
@@ -45,8 +47,12 @@ function LearningPathsPage({ Session, pathsData }) {
             title={"Your paths"}
             isOwner={true}
             pathsData={pathsData}
-            onButtonClick={(pathsData) => {
+            onButtonClick={() => {
+              // deleteDoc(doc(db,"path",`${pathsData.email}-${pathsData.Title}`)).then(()=>{
+              //   dispatch(Updates)
+              // });
              
+              
               //delete path
             }}
           />
