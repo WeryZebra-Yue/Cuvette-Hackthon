@@ -37,7 +37,8 @@ function ForumPage({
       let list = []
       
       snap.forEach((post)=>{
-       list.push(post.data())
+        
+       list.push({...post.data(),id:post.id})
       })
       console.log(list)
       setFourmData(list)
@@ -51,7 +52,8 @@ function ForumPage({
         let list = []
         
         snap.forEach((post)=>{
-         list.push(post.data())
+          list.push({...post.data(),id:post.id})
+
        
         })
         setFourmData(list)

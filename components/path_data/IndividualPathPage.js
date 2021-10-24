@@ -197,7 +197,7 @@ function IndividualPathPage({
               <button
                 onClick={() => {
                   let User = [];
-                  getDoc(doc(db, "path", `${Session?.user.email}-${Querye}`))
+                  getDoc(doc(db, "path", `${Querye}`))
                     .then((snapshot) => {
                       User = snapshot.data() ? snapshot.data().user : [];
                     })

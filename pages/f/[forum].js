@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getSession } from "next-auth/react";
 import QuestionPage from "../../components/question_page/QuestionPage";
+import { doc, getDoc } from "@firebase/firestore";
+import { db } from "../../firebases";
 
 function forum({ Session }) {
+  // const router
+  useEffect(()=>{
+    
+  })
   return (
     <div>
-      <QuestionPage Session={Session} />
+      <QuestionPage Session={Session} questionData={getDoc(doc(db,"question",))} />
     </div>
   );
 }
