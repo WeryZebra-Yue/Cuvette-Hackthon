@@ -8,8 +8,20 @@ export default function forum({ Session }) {
     </>
   );
 }
+
+
 export async function getServerSideProps(context) {
   const Session = await getSession(context);
+
+  if (!Session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       Session,
