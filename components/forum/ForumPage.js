@@ -24,9 +24,10 @@ function ForumPage({
   const searchBarInputRef = React.useRef();
 
   useEffect(() => {
-    reactDom.findDOMNode(searchBarInputRef.current).value = router.query.q;
+    if (router.query.q) {
+      reactDom.findDOMNode(searchBarInputRef.current).value = router.query.q;
+    }
   }, [router.query]);
-
 
   return (
     <div className={ForumPageStyles.forum_page_primary_wrapper}>
@@ -36,6 +37,7 @@ function ForumPage({
           className={ForumPageStyles.forum_page_search_bar_wrapper}
           onSubmit={(e) => {
             e.preventDefault();
+            e.target.blur();
             router.push(`/forum?q=${e.target.elements[0].value}`);
           }}
         >
@@ -48,7 +50,6 @@ function ForumPage({
             className={ForumPageStyles.forum_page_search_bar_input}
             type="text"
             placeholder="Search something..."
-            defaultValue={router.query.q}
             ref={searchBarInputRef}
           />
         </form>

@@ -10,12 +10,16 @@
 .forum_page_upper_sec_wrapper {
   width: 100%;
   border-bottom: 1px solid white;
+  position: sticky;
+  top: 80px;
+  padding-top: 24px;
+  background-color: var(--primary-dark-color);
 }
 
 .forum_page_search_bar_wrapper {
   padding: 0;
   margin: 0;
-  margin-top: 24px;
+  /* margin-top: 24px; */
   margin-bottom: 24px;
   padding: 10px;
   padding-left: 18px;
@@ -28,6 +32,8 @@
   display: flex;
   align-items: center;
   margin-left: 16px;
+  /* position: sticky;
+  top: 30px; */
 }
 
 .forum_page_search_bar_wrapper:focus-within {
