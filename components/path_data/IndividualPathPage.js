@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
+import reactDom from "react-dom";
 import Link from "next/link";
 
 import IndividualPathPageStyles from "./IndividualPathPage.module.css";
@@ -12,7 +13,8 @@ import TimelineObjComp from "./TimelineObjComp";
 import PathDataPageRightPanelButton from "./PathDataPageRightPanelButton";
 
 import updatedTextareaHeight from "./helpers/text_area_height_updater";
-import reactDom from "react-dom";
+import useMediaQuery from "./../helpers/useMediaQuery";
+
 import { doc, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "../../firebases";
 import { useDispatch } from "react-redux";
@@ -26,20 +28,15 @@ function IndividualPathPage({
   people,
   pathDatax,
   pathData = {
-    Title:
-    pathDatax.CTitle?pathDatax.CTitle:pathDatax.Title ,
-    timeline: pathDatax.currentTimelineData?pathDatax.currentTimelineData: Array(1).fill({
-      title:
-        "",
-      description:
-        "",
-    }),
-   
-   
+    Title: pathDatax.CTitle ? pathDatax.CTitle : pathDatax.Title,
+    timeline: pathDatax.currentTimelineData
+      ? pathDatax.currentTimelineData
+      : Array(1).fill({
+          title: "",
+          description: "",
+        }),
   },
 }) {
-  
-
   const titleRef = React.useRef(123456);
   const dispatch = useDispatch();
   const [isInEditMode, setIsInEditMode] = React.useState(false);
@@ -49,10 +46,16 @@ function IndividualPathPage({
   );
   const [currentTitle, setCurrentTitle] = React.useState(pathData.Title);
 
+  const windowWidth = useMediaQuery();
+
   useEffect(() => {
     reactDom.findDOMNode(titleRef.current).value = currentTitle;
     updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
   }, [currentTitle]);
+
+  useEffect(() => {
+    updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
+  }, [windowWidth]);
 
   useEffect(() => {
     setIsDataChanged(
@@ -75,10 +78,14 @@ function IndividualPathPage({
 
   const saveDataChanges = () => {
     console.log("save");
-     setDoc(doc(db,"path",Querye),{currentTimelineData,CTitle:currentTitle},{
-       merge:true
-     })
-     console.log(currentTimelineData)
+    setDoc(
+      doc(db, "path", Querye),
+      { currentTimelineData, CTitle: currentTitle },
+      {
+        merge: true,
+      }
+    );
+    console.log(currentTimelineData);
     setIsInEditMode(false);
   };
 
@@ -105,7 +112,7 @@ function IndividualPathPage({
     });
     setCurrentTimelineData(tempData);
   };
-  
+
   return (
     <div className={IndividualPathPageStyles.i_p_p_primary_wrapper}>
       <div className={IndividualPathPageStyles.i_p_p_timeline_wrapper}>
@@ -121,31 +128,34 @@ function IndividualPathPage({
         />
 
         <div className={IndividualPathPageStyles.i_p_p_timeline_list_wrapper}>
-          {(isOwner || isShared) && currentTimelineData.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className={IndividualPathPageStyles.i_p_p_timeline_item}
-              >
-                <TimelineObjComp
-                  title={item.title}
-                  description={item.description}
-                  isEditable={isInEditMode}
-                  dataChangeFun={handleInputDataChange}
-                  keyindex={index}
-                />
-              </div>
-            );
-          })} 
+          {(isOwner || isShared) &&
+            currentTimelineData.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={IndividualPathPageStyles.i_p_p_timeline_item}
+                >
+                  <TimelineObjComp
+                    title={item.title}
+                    description={item.description}
+                    isEditable={isInEditMode}
+                    dataChangeFun={handleInputDataChange}
+                    keyindex={index}
+                  />
+                </div>
+              );
+            })}
         </div>
-      { isOwner? (<div
-          className={IndividualPathPageStyles.i_p_p_add_button}
-          onClick={() => {
-            addNewTimelineObj();
-          }}
-        >
-          <Image src={plusButton} layout="responsive" />
-        </div>):null}
+        {isOwner ? (
+          <div
+            className={IndividualPathPageStyles.i_p_p_add_button}
+            onClick={() => {
+              addNewTimelineObj();
+            }}
+          >
+            <Image src={plusButton} layout="responsive" />
+          </div>
+        ) : null}
       </div>
       <div className={IndividualPathPageStyles.i_p_p_info_wrapper}>
         <div className={IndividualPathPageStyles.i_p_p_info_sub_wrapper}>
@@ -158,12 +168,13 @@ function IndividualPathPage({
                     onClickFun={setToEditMode}
                     color="#87F192"
                   />
-                
-                  <PathDataPageRightPanelButton 
+
+                  <PathDataPageRightPanelButton
                     name="share"
                     onClickFun={() => {
-                      navigator.clipboard.writeText(`localhost:3000/p/${Querye}`);
-
+                      navigator.clipboard.writeText(
+                        `localhost:3000/p/${Querye}`
+                      );
                     }}
                     color="#c5c5c5"
                   />
@@ -173,7 +184,6 @@ function IndividualPathPage({
                   <PathDataPageRightPanelButton
                     name="save changes"
                     onClickFun={saveDataChanges}
-                    
                     color={isDataChanged ? "#87F192" : "#c5c5c5"}
                   />
                   <PathDataPageRightPanelButton
@@ -183,22 +193,31 @@ function IndividualPathPage({
                   />
                 </>
               )
-            ) :  !isShared ? (<button onClick={()=>{
-              let User = [];
-              getDoc(doc(db,"path",`${Session?.user.email}-${Querye}`)).then((snapshot)=>{
-                User = snapshot.data()?snapshot.data().user:[]
-              }).then(()=>{
-                User.push(Session?.user.email.split('@')[0])
-                setDoc(doc(db,"path",`${Querye}`),{
-                  user :  User
-                },{merge:true}).then(()=>{
-                  dispatch(Access())
-                })
-              })
-               
-            }} >
-              Add to your paths
-             </button>):null}
+            ) : !isShared ? (
+              <button
+                onClick={() => {
+                  let User = [];
+                  getDoc(doc(db, "path", `${Session?.user.email}-${Querye}`))
+                    .then((snapshot) => {
+                      User = snapshot.data() ? snapshot.data().user : [];
+                    })
+                    .then(() => {
+                      User.push(Session?.user.email.split("@")[0]);
+                      setDoc(
+                        doc(db, "path", `${Querye}`),
+                        {
+                          user: User,
+                        },
+                        { merge: true }
+                      ).then(() => {
+                        dispatch(Access());
+                      });
+                    });
+                }}
+              >
+                Add to your paths
+              </button>
+            ) : null}
           </div>
           <div
             className={IndividualPathPageStyles.i_p_p_people_wrapper}
@@ -214,40 +233,41 @@ function IndividualPathPage({
               People with access
             </h4>
             <div className={IndividualPathPageStyles.i_p_p_people_list_wrapper}>
-              { people && people.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={IndividualPathPageStyles.i_p_p_person_wrapper}
-                  >
+              {people &&
+                people.map((item, index) => {
+                  return (
                     <div
-                      className={
-                        IndividualPathPageStyles.i_p_p_person_inner_wrapper
-                      }
+                      key={index}
+                      className={IndividualPathPageStyles.i_p_p_person_wrapper}
                     >
                       <div
-                        className={IndividualPathPageStyles.i_p_p_person_image}
-                      >
-                        <Image
-                          src={item.image}
-                          width={"100%"}
-                          height={"100%"}
-                          layout="responsive"
-                        />
-                      </div>
-                      <div
                         className={
-                          IndividualPathPageStyles.i_p_p_person_name_wrapper
+                          IndividualPathPageStyles.i_p_p_person_inner_wrapper
                         }
                       >
-                        {item.username}
+                        <div
+                          className={
+                            IndividualPathPageStyles.i_p_p_person_image
+                          }
+                        >
+                          <Image
+                            src={item.image}
+                            width={"100%"}
+                            height={"100%"}
+                            layout="responsive"
+                          />
+                        </div>
+                        <div
+                          className={
+                            IndividualPathPageStyles.i_p_p_person_name_wrapper
+                          }
+                        >
+                          {item.username}
+                        </div>
                       </div>
                     </div>
-                   
-                    
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
         </div>

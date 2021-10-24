@@ -4,6 +4,7 @@ import reactDom from "react-dom";
 import TimelineObjCompStyles from "./TimelineObjComp.module.css";
 
 import updatedTextareaHeight from "./helpers/text_area_height_updater";
+import useMediaQuery from "./../helpers/useMediaQuery";
 
 function TimelineObjComp({
   title,
@@ -15,15 +16,17 @@ function TimelineObjComp({
   const titleRef = useRef(258);
   const descriptionRef = useRef(258);
 
+  const windowWidth = useMediaQuery();
+
   useEffect(() => {
     updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
     updatedTextareaHeight(reactDom.findDOMNode(descriptionRef.current));
-  }, []);
+  }, [windowWidth]);
 
   useEffect(() => {
     console.log(title);
     reactDom.findDOMNode(titleRef.current).value = title;
-      updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
+    updatedTextareaHeight(reactDom.findDOMNode(titleRef.current));
   }, [title]);
 
   useEffect(() => {
