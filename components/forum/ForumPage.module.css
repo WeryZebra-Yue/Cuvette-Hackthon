@@ -7,6 +7,38 @@
   background-color: var(--primary-dark-color);
   position: relative;
 }
+
+.learning_path_create_button {
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-bottom: 13px;
+  margin: 10px;
+  margin-top: 20px;
+  padding-top: 13px;
+  border: 1px solid white;
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: white;
+  font-size: 18px;
+  transition: background 0.15s ease-out;
+}
+
+.learning_path_create_button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.learning_path_create_button_icon {
+  width: 18px;
+  margin-right: 13px;
+}
+
 .forum_page_upper_sec_wrapper {
   width: 100%;
   border-bottom: 1px solid white;
