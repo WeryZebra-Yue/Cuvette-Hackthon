@@ -59,6 +59,10 @@
   font-size: 18px;
 }
 
+.primary_navbar_link a:hover {
+  color: white;
+}
+
 .navbar_user_details_sec {
   display: flex;
   height: fit-content;
