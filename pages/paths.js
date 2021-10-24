@@ -36,7 +36,7 @@ function learning({ Session }) {
   }, [UpdateState]);
 
   useEffect(() => {
-    console.log(Paths);
+  
   }, [Paths]);
   return (
     <div>

@@ -45,8 +45,8 @@ function LearningPathsPage({ Session, pathsData }) {
             title={"Your paths"}
             isOwner={true}
             pathsData={pathsData}
-            onButtonClick={(pathID) => {
-              console.log(pathID);
+            onButtonClick={(pathsData) => {
+             
               //delete path
             }}
           />
