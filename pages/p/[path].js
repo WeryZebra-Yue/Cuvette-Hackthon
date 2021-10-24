@@ -33,7 +33,7 @@ function path({ Session }) {
 useEffect(()=>{
     if(query!=null){
         getDoc(doc(db,"path",query)).then((snapshot)=>{
-            snapshot.data()?.user.forEach((mail)=>{
+            snapshot.data()?.user?.forEach((mail)=>{
                 
                 if(mail==Session?.user.email.split('@')[0]){
                     setShare(true)
