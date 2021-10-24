@@ -41,28 +41,32 @@ function path({ Session }) {
       });
     }
   }, [ShareState, query]);
-  useEffect(()=>{
-    console.log(People)
-  }
-  ,[People])
   useEffect(() => {
+    console.log(People);
+  }, [People]);
+  useEffect(() => {
+    loadPeopleData();
+  }, [data]);
+
+  async function loadPeopleData() {
     let list = [];
     if (data != null) {
       let uset = [data.email.slice()];
-      data.user?.map((item) => {
-        uset.push(item);
-      });
-      for(let i =0;i<uset.length;i++){
-        get(ref(rdb, "user/" + uset[i])).then((snap) => {
-          list.push(snap.val());
-        });
+
+      console.log(data.user);
+      for (let index = 0; index < data.user.length; index++) {
+        uset.push(data.user[index]);
       }
-      
+      console.log(uset.length);
+      for (let i = 0; i < uset.length; i++) {
+        const tempVar = await get(ref(rdb, "user/" + uset[i]));
+        list.push(tempVar.val());
+      }
+
       console.log(list);
       setPeople(list);
-   
     }
-  }, [data]);
+  }
 
   return (
     <div>
@@ -73,7 +77,7 @@ function path({ Session }) {
           isShared={Share}
           // pathData = {data}
           pathDatax={data}
-          people={People}//
+          people={People} //
           isOwner={Session?.user.email.split("@")[0] === query.split("-")[0]}
           //   Shared = {}
         />
