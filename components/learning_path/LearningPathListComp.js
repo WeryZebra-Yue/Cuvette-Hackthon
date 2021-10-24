@@ -88,7 +88,7 @@ function LearningPathListComp({ title, pathsData, isOwner, onButtonClick }) {
                     dispatch(Updates())
                   
                  
-                  
+                  setIsDeletePopUpOpen(false)
                 }
                 }>Yes</button>
                 <br/>

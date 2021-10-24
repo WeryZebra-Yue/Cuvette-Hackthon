@@ -1,27 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import reactDom from "react-dom";
-// import learningPathsPageStyles from '../learning_path/learningPathsPageStyles.module.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Card, CardHeader, Modal } from "reactstrap";
+
 import ForumPageStyles from "./ForumPage.module.css";
 
 import searchIcon from "../../assets/forum/search.svg";
 
 import Navbar from "../navbar";
+import { db } from "../../firebases";
+import { addDoc, collection, doc, getDocs, setDoc } from "@firebase/firestore";
 
 function ForumPage({
   Session,
-  forumData = Array(20).fill({
-    id: 0,
-    tags: ["Web dev", "MERN", "Mongo"],
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisi malesuada faucibus duis. Bibendum vulputate felis nibh quam dui lacus tincidunt ac risus. Suspendisse consequat orci, ",
-  }),
+    
 }) {
-  const router = useRouter();
 
+  const router = useRouter();
+  const TextRef = useRef(null);
+  const Tag1Ref = useRef(null);
+  const Tag2Ref = useRef(null);
+  const Tag3Ref = useRef(null);
+  const [forumData,setFourmData] = useState(null);
   const searchBarInputRef = React.useRef();
+  const [isDeletePopUpOpen, setIsDeletePopUpOpen] = React.useState(false);
+  useEffect(()=>{
+    getDocs(collection(db,"question")).then((snap)=>{
+      let list = []
+      
+      snap.forEach((post)=>{
+       list.push(post.data())
+     
+      })
+      setFourmData(list)
+   })
+  },[isDeletePopUpOpen])
+
+  console.log(forumData)
 
   useEffect(() => {
     if (router.query.q) {
@@ -34,7 +52,7 @@ function ForumPage({
        <div
           className={ForumPageStyles.learning_path_create_button}
           onClick={() => {
-            setIsCreatePopUpOpen(true);
+            setIsDeletePopUpOpen(true);
           }}
         >New question</div>
       <Navbar userDetails={Session.user} />
@@ -61,7 +79,7 @@ function ForumPage({
         </form>
       </div>
       <div className={ForumPageStyles.forum_page_questions_list_wrapper}>
-        {forumData.map((question, index) => (
+        {forumData?.map((question, index) => (
           <div
             className={ForumPageStyles.forum_page_question_wrapper}
             key={index}
@@ -86,6 +104,49 @@ function ForumPage({
           </div>
         ))}
       </div>
+      <Modal isOpen={isDeletePopUpOpen} toggle={() =>{
+          setIsDeletePopUpOpen(!isDeletePopUpOpen)
+      }}>
+      <div className=" modal-body p-0">
+        <Card className=" bg-secondary shadow border-0">
+          <CardHeader className=" bg-white pb-5">
+            <div className=" text-muted text-center mb-3 mt-3">
+              <form onSubmit={(e)=>{
+                e.preventDefault()
+                console.log(
+                  {
+                    question : TextRef.current.value,
+                    author :{ name : Session.user.name,
+                    image : Session.user.image},
+                    tags : [Tag1Ref.current.value,Tag2Ref.current.value,Tag3Ref.current.value]
+                  }
+              )
+                addDoc(collection(db,"question"),{
+                  question : TextRef.current.value,
+                  author :{ name : Session.user.name,
+                  image : Session.user.image},
+                  tags : [Tag1Ref.current.value,Tag2Ref.current.value,Tag3Ref.current.value]
+            
+                }).then(()=>{
+                  setIsDeletePopUpOpen(false)
+                })
+              }}>
+               <div>Question : <input ref={TextRef} required   type="text" placeholder={'Type to add question'}/></div>
+               <div>Tags (3 Tags are required ):   <input ref={Tag1Ref} required   type="text" className="m-1" placeholder="#"/>
+               <input ref={Tag2Ref} required   type="text"  className="m-1" placeholder="#"/>
+               <input ref={Tag3Ref} required   type="text"  className="m-1" placeholder="#"/>
+             
+               <br/>  
+               <button type="submit">Add</button>
+               </div>
+               </form>
+
+             
+            </div>
+          </CardHeader>
+        </Card>
+      </div>
+    </Modal>
     </div>
   );
 }
