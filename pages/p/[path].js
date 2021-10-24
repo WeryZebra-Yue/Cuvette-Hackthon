@@ -1,6 +1,6 @@
 import { get, ref } from "@firebase/database";
-import { collection, doc, getDoc, getDocs  } from "@firebase/firestore";
-import {  query as Q, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "@firebase/firestore";
+import { query as Q, where } from "firebase/firestore";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
@@ -14,15 +14,13 @@ function path({ Session }) {
   const [Share, setShare] = useState(null);
   const [People, setPeople] = useState(null);
   const [data, setData] = useState(null);
-  const ShareState = useSelector(state=>state.access)
+  const ShareState = useSelector((state) => state.access);
   useEffect(() => {
     if (router.pathname != null) {
       setquery(router.query.path);
-      
 
       getDoc(doc(db, "path", `${router.query.path}`)).then((snapshot) => {
         setData(snapshot.data());
-        
       });
     }
   }, [router]);
@@ -30,59 +28,59 @@ function path({ Session }) {
   useEffect(() => {
     // console.log(data);
   }, [data]);
-useEffect(()=>{
-    if(query!=null){
-        getDoc(doc(db,"path",query)).then((snapshot)=>{
-            snapshot.data()?.user?.forEach((mail)=>{
-                
-                if(mail==Session?.user.email.split('@')[0]){
-                    setShare(true)
-                    
-                }
-            })
-            
-            if(setShare == null)
-                setShare(false)
-        }); 
-    }
-  
-},[ShareState,query])
-  
-  useEffect(()=>{
-  if(data!=null){
+  useEffect(() => {
+    if (query != null) {
+      getDoc(doc(db, "path", query)).then((snapshot) => {
+        snapshot.data()?.user?.forEach((mail) => {
+          if (mail == Session?.user.email.split("@")[0]) {
+            setShare(true);
+          }
+        });
 
-    let list = []
-    data.user?.map((item)=>{
-      get(ref(rdb,"user/"+item)).then((snap)=>{
-        list.push(snap.val())
-      }).then(()=>{
-        setPeople(list)
-        
-      })  
-    })
+        if (setShare == null) setShare(false);
+      });
+    }
+  }, [ShareState, query]);
+  useEffect(()=>{
+    console.log(People)
   }
-  },[data])
-    
-  
+  ,[People])
+  useEffect(() => {
+    let list = [];
+    if (data != null) {
+      let uset = [data.email.slice()];
+      data.user?.map((item) => {
+        uset.push(item);
+      });
+      for(let i =0;i<uset.length;i++){
+        get(ref(rdb, "user/" + uset[i])).then((snap) => {
+          list.push(snap.val());
+        });
+      }
+      
+      console.log(list);
+      setPeople(list);
+   
+    }
+  }, [data]);
+
   return (
     <div>
       {data ? (
         <IndividualPathPage
           Session={Session}
-          Querye = {query}
+          Querye={query}
           isShared={Share}
           // pathData = {data}
-          pathDatax = {data}
-          people = {
-           People
-          }
+          pathDatax={data}
+          people={People}//
           isOwner={Session?.user.email.split("@")[0] === query.split("-")[0]}
-        //   Shared = {}
+          //   Shared = {}
         />
       ) : null}
     </div>
   );
-      }
+}
 export async function getServerSideProps(context) {
   const Session = await getSession(context);
   if (!Session) {

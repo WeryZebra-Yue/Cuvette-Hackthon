@@ -12,7 +12,9 @@ import searchIcon from "../../assets/forum/search.svg";
 
 import Navbar from "../navbar";
 import { db } from "../../firebases";
-import { addDoc, collection, doc, getDocs, setDoc } from "@firebase/firestore";
+import { addDoc, collection, doc, getDocs, query, setDoc, where } from "@firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { Updates } from "../../action";
 
 function ForumPage({
   Session,
@@ -24,22 +26,43 @@ function ForumPage({
   const Tag1Ref = useRef(null);
   const Tag2Ref = useRef(null);
   const Tag3Ref = useRef(null);
+  const State = useSelector(state=>state.updates)
   const [forumData,setFourmData] = useState(null);
   const searchBarInputRef = React.useRef();
+  const dispatch = useDispatch()
   const [isDeletePopUpOpen, setIsDeletePopUpOpen] = React.useState(false);
   useEffect(()=>{
-    getDocs(collection(db,"question")).then((snap)=>{
+    
+    getDocs(query(collection(db,"question"),where("tags","array-contains",searchBarInputRef?.current.value))).then((snap)=>{
       let list = []
       
       snap.forEach((post)=>{
        list.push(post.data())
-     
       })
+      console.log(list)
       setFourmData(list)
    })
-  },[isDeletePopUpOpen])
+   
+ 
+  },[searchBarInputRef?.current?.value])
+  useEffect(()=>{
+    if(searchBarInputRef?.current?.value==''){
+      getDocs(collection(db,"question")).then((snap)=>{
+        let list = []
+        
+        snap.forEach((post)=>{
+         list.push(post.data())
+       
+        })
+        setFourmData(list)
+     })
+    }
+  
+    
+   
+  },[State,searchBarInputRef?.current?.value])
 
-  console.log(forumData)
+  // console.log(forumData)
 
   useEffect(() => {
     if (router.query.q) {
@@ -60,7 +83,9 @@ function ForumPage({
         <form
           className={ForumPageStyles.forum_page_search_bar_wrapper}
           onSubmit={(e) => {
+
             e.preventDefault();
+            dispatch(Updates())
             e.target.blur();
             router.push(`/forum?q=${e.target.elements[0].value}`);
           }}
@@ -73,6 +98,10 @@ function ForumPage({
           <input
             className={ForumPageStyles.forum_page_search_bar_input}
             type="text"
+            onChange={(e)=>{
+             searchBarInputRef.current.value = e.target.value.replace(' ','')
+             console.log(e.target.value )
+            }}
             placeholder="Search something..."
             ref={searchBarInputRef}
           />

@@ -8,6 +8,9 @@ import PrimaryNavbar from "../navbar/Navbar";
 
 function QuestionPage({
   Session,
+
+}) 
+{
   questionData = {
     question:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisi malesuada faucibus duis. Bibendum vulputate felis nibh quam dui lacus tincidunt ac risus. Suspendisse consequat orci, ",
@@ -24,8 +27,7 @@ function QuestionPage({
         image: Session.user.image,
       },
     }),
-  },
-}) {
+  }
   return (
     <div className={QuestionPageStyles.q_p_primary_wrapper}>
       <PrimaryNavbar userDetails={Session.user} />
