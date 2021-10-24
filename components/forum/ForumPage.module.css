@@ -185,6 +185,8 @@
 
 .forum_page_new_question_popup_header,
 .forum_page_new_question_popup_input,
+.forum_page_new_question_popup_input2,
+.forum_page_new_question_popup_input1,
 .forum_page_new_question_popup_submit_button {
   color: white;
   font-size: 18px;
@@ -196,7 +198,7 @@
   margin-top: 25px;
 }
 
-.forum_page_new_question_popup_input {
+.forum_page_new_question_popup_input,.forum_page_new_question_popup_input1,.forum_page_new_question_popup_input2 {
   margin-top: 12px;
   padding: 8px;
   padding-left: 15px;
