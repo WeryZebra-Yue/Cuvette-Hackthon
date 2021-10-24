@@ -52,6 +52,7 @@
   font-family: "Montserrat", sans-serif;
   resize: none;
   font-weight: 400;
+  overflow: hidden;
 }
 
 .t_o_title {
@@ -60,7 +61,6 @@
 }
 
 .t_o_description {
-  overflow: hidden;
   margin-top: 8px;
   font-size: 15px;
 }
