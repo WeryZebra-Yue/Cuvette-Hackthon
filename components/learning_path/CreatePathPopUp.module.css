@@ -1,0 +1,62 @@
+.create_path_popup_primary_wrapper {
+  width: fit-content;
+  background: transparent;
+  border-radius: 0;
+}
+
+.create_path_popup_secondary_wrapper {
+  padding: 25px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 3px;
+  background-color: var(--primary-dark-color);
+  border: 3px solid white;
+}
+
+.create_path_popup_title,
+.create_path_popup_input,
+.create_path_popup_submit_button {
+  color: white;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+.create_path_form_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.create_path_popup_title {
+  margin-bottom: 20px;
+}
+
+.create_path_popup_input {
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: none;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+.create_path_popup_submit_button {
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 20px;
+  background: none;
+  border: 1px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.15s ease-out;
+}
+
+.create_path_popup_submit_button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}

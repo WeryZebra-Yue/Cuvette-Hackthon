@@ -1,5 +1,8 @@
 import React, { useRef } from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import CreatePathPopUpStyles from "./CreatePathPopUp.module.css";
 
 import { db } from "../../firebases";
 import { doc, setDoc } from "firebase/firestore";
@@ -7,7 +10,6 @@ import { doc, setDoc } from "firebase/firestore";
 import { Card, CardHeader, Modal } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { Updates } from "../../action";
-
 
 function CreatePathPopUp({ isOpen, toggleFun, Session }) {
   const Textref = useRef(null);
@@ -32,23 +34,33 @@ function CreatePathPopUp({ isOpen, toggleFun, Session }) {
     });
   };
   return (
-    <Modal isOpen={isOpen} toggle={toggleFun}>
-      <div className=" modal-body p-0">
-        <Card className=" bg-secondary shadow border-0">
-          <CardHeader className=" bg-white pb-5">
-            <div className=" text-muted text-center mb-3">
-              <small>Add a New Name : </small>
-            </div>
-            <div className=" btn-wrapper text-center">
-              <div>
-                <form onSubmit={(e) => AddDataToFirebase(e)}>
-                  <input type="text" ref={Textref} />
-                  <button type="submit">Add</button>
-                </form>
-              </div>
-            </div>
-          </CardHeader>
-        </Card>
+    <Modal
+      isOpen={isOpen}
+      toggle={toggleFun}
+      centered={true}
+      className={CreatePathPopUpStyles.create_path_popup_primary_wrapper}
+    >
+      <div className={CreatePathPopUpStyles.create_path_popup_secondary_wrapper}>
+        <div className={CreatePathPopUpStyles.create_path_popup_title}>
+          Create a new path
+        </div>
+        <form
+          onSubmit={(e) => AddDataToFirebase(e)}
+          className={CreatePathPopUpStyles.create_path_form_wrapper}
+        >
+          <input
+            type="text"
+            placeholder="Name of path"
+            ref={Textref}
+            className={CreatePathPopUpStyles.create_path_popup_input}
+          />
+          <button
+            type="submit"
+            className={CreatePathPopUpStyles.create_path_popup_submit_button}
+          >
+            Add
+          </button>
+        </form>
       </div>
     </Modal>
   );
