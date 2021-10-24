@@ -21,7 +21,7 @@ export default function Home({ Session }) {
       username: Session.user.name,
       image: Session.user.image,
     });
-    userAction();
+  
   
   const userAction = async () => {
     const response = await fetch(

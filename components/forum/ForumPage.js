@@ -71,7 +71,7 @@ function ForumPage({ Session }) {
 
   useEffect(() => {
     if (router.query.q) {
-     searchBarInputRef.current?.value = router.query.q;
+     searchBarInputRef.current.value = router.query.q;
     }
   }, [router.query]);
 
