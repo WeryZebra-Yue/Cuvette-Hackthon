@@ -1,33 +1,30 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import QuestionPageStyles from "./QuestionPage.module.css";
 
 import PrimaryNavbar from "../navbar/Navbar";
+import { db } from "../../firebases";
+import { doc, getDoc, setDoc } from "@firebase/firestore";
+import { useDispatch } from "react-redux";
+import { Updates } from "../../action";
+import { set } from "@firebase/database";
 
 function QuestionPage({
   Session,
-
+  questionData,
+  query
 }) 
-{
-  questionData = {
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisi malesuada faucibus duis. Bibendum vulputate felis nibh quam dui lacus tincidunt ac risus. Suspendisse consequat orci, ",
-    tags: ["Web Dev", "MERN", "Next.js", "Firebase"],
-    author: {
-      name: "John Doe",
-      image: Session.user.image,
-    },
-    answers: Array(10).fill({
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mauris elementum ut parturient. Fringilla vulputate dui at ut sed. Vivamus sollicitudin leo bibendum dolor nunc risus, venenatis id. Imperdiet nibh habitasse nunc tortor consequat bibendum duis eget. \n Amet molestie odio tortor facilisi pellentesque in eget lobortis. Sed malesuada sed sed mauris proin sed purus nascetur ut. Lectus interdum tellus urna aliquam facilisi. Et egestas cursus vel pellentesque. Congue amet consectetur integer sed pulvinar in sollicitudin senectus et.",
-      user: {
-        name: "John Doe",
-        image: Session.user.image,
-      },
-    }),
-  }
+
+{ const [Answer,setAnswer] =  useState(questionData.answer)
+  useEffect(() => {
+   console.log(questionData)
+  }, [questionData])
+  
+  const dispatch = useDispatch();
+  const TextRef = useRef();
+  
   return (
     <div className={QuestionPageStyles.q_p_primary_wrapper}>
       <PrimaryNavbar userDetails={Session.user} />
@@ -40,7 +37,7 @@ function QuestionPage({
             <span
               key={index}
               className={QuestionPageStyles.q_p_question_details_tag}
-            >
+              >
               {tag}
             </span>
           ))}
@@ -63,13 +60,25 @@ function QuestionPage({
         className={QuestionPageStyles.q_p_add_answer_wrapper}
         onSubmit={(e) => {
           e.preventDefault();
-          let answer = e.target.answer.value;
-          console.log(answer);
+            getDoc(doc(db,"question",query)).then((snap)=>{
+            const answer = snap.data().answer?(snap.data().answer):[];
+            answer.push({ answer : TextRef.current.value , author : Session.user.name , image : Session.user.image})
+         
+              setDoc(doc(db,"question",query),{
+                answer:answer
+              },{merge:true}).then(()=>{
+                TextRef.current.value = ""
+                setAnswer(answer)
+                dispatch(Updates())
+              })
+          })
+          
         }}
       >
         <textarea
           type="text"
           name="answer"
+          ref = {TextRef}
           placeholder="Add your answer.."
           className={QuestionPageStyles.q_p_add_answer_input}
         />
@@ -81,29 +90,30 @@ function QuestionPage({
         </button>
       </form>
       <div className={QuestionPageStyles.q_p_answers_wrapper}>
-        {questionData.answers.map((answer, index) => (
+        {Answer?.map((answerx, index) => (
           <div key={index} className={QuestionPageStyles.q_p_answer_wrapper}>
             <div className={QuestionPageStyles.q_p_answering_user_details}>
               <div className={QuestionPageStyles.q_p_answering_user_image}>
                 <Image
-                  src={answer.user.image}
+                  src={answerx.image}
                   height={"100%"}
                   width={"100%"}
                   layout="responsive"
-                />
+                  />
               </div>
               <h4 className={QuestionPageStyles.q_p_answering_user_name}>
-                {answer.user.name}
+                {answerx.author}
               </h4>
             </div>
             <p className={QuestionPageStyles.q_p_answer_text}>
-              {answer.answer}
+              {answerx.answer}
             </p>
           </div>
         ))}
       </div>
     </div>
   );
+
 }
 
 export default QuestionPage;
