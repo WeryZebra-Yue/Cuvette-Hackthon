@@ -9,6 +9,7 @@ import factBgLinesGraphic from "../../assets/home/lines.svg";
 import arrowGraphic from "../../assets/home/arrow.svg";
 
 import Navbar from "../navbar";
+import { signOut } from "next-auth/react";
 
 function HomePage({ Session }) {
   const [fact,setFact] = useState();
@@ -86,6 +87,9 @@ function HomePage({ Session }) {
                 </div>
               </div>
             </Link>
+            <div className={HomePageStyles.Signout}>
+            <div onClick={signOut} className={HomePageStyles.home_page_content_redirect_button}>Sign out</div>
+            </div>
           </div>
         </div>
       </div>

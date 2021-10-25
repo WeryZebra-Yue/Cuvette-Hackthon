@@ -171,10 +171,13 @@ function IndividualPathPage({
 
                   <PathDataPageRightPanelButton
                     name="share"
+                    
                     onClickFun={() => {
                       navigator.clipboard.writeText(
-                        `localhost:3000/p/${Querye}`
+                        `https://cuvette-hackthon.vercel.app/p/${Querye}`
                       );
+                      alert("Text copied !")
+                      
                     }}
                     color="#c5c5c5"
                   />
@@ -195,14 +198,21 @@ function IndividualPathPage({
               )
             ) : !isShared ? (
               <button
+              className={IndividualPathPageStyles.i_p_p_people_list_wrapper}
                 onClick={() => {
                   let User = [];
                   getDoc(doc(db, "path", `${Querye}`))
                     .then((snapshot) => {
-                      User = snapshot.data() ? snapshot.data().user : [];
+                      User = snapshot.data() ? snapshot.data()?.user : [];
                     })
                     .then(() => {
-                      User.push(Session?.user.email.split("@")[0]);
+                      if(User!=undefined){
+                       User.push(Session?.user.email.split("@")[0]);
+                      }
+                      else{
+                        User = [Session?.user.email.split("@")[0]]
+                      }
+                      console.log(User)
                       setDoc(
                         doc(db, "path", `${Querye}`),
                         {

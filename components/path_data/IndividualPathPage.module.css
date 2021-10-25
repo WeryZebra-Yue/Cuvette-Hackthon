@@ -106,6 +106,10 @@
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 18px;
+  font-size: 20px;
+  color: white;
+  margin: 10px;
+  cursor: pointer;
   padding-top: 15px;
   padding-bottom: 15px;
   margin-top: 25px;

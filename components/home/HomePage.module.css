@@ -47,9 +47,54 @@
   margin-left: 300px;
   width: 350px;
 }
+.SignOut{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (max-width: 1149px) {
+  .home_page_fact_wrapper{
+    transform: scale(0.7)!important;
+    margin: 0;
+  }
+  .home_page_content{
+    margin-left: 100px!important;
+  }
 
+}
+@media only screen and (max-width: 450px) {
+  .home_page_secondary_wrapper{
+    transform: scale(0.9)!important;
+  }
+  .home_page_content{
+    margin-left: 0px!important;
+  }
+  .home_page_fact_text{
+    margin-left: 0px;
+  }
+
+}
+@media only screen and (max-width: 846px) {
+  .home_page_fact_wrapper{
+    transform: scale(0.7)!important;
+    margin: 0px;
+  }
+  .home_page_secondary_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .home_page_content{
+    margin-left: 0px!important;
+  }
+
+}
 .home_page_content {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-left: 400px;
 }
 

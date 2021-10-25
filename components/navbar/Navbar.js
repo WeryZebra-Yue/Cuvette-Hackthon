@@ -12,12 +12,15 @@ function PrimaryNavbar({ userDetails }) {
 
   return (
     <nav className={navbarStyles.navbar_primary_wrapper}>
-      <div className={navbarStyles.navbar_left_sec}>
-        <Link href="/">
+      <div>
+      <Link href="/">
           <div className={navbarStyles.primary_navbar_logo}>
             <Image src={logo} layout="responsive" />
           </div>
         </Link>
+      </div>
+      <div className={navbarStyles.navbar_left_sec}>
+     
         <ul className={navbarStyles.primary_navbar_links}>
           <li
             className={
@@ -35,7 +38,7 @@ function PrimaryNavbar({ userDetails }) {
                 : navbarStyles.primary_navbar_link
             }
           >
-            <Link href="/paths">Learning paths</Link>
+            <Link href="/paths">Paths</Link>
           </li>
           <li
             className={
@@ -47,8 +50,7 @@ function PrimaryNavbar({ userDetails }) {
             <Link href="/forum">Forum</Link>
           </li>
         </ul>
-      </div>
-      <div className={navbarStyles.navbar_user_details_sec}>
+        <div className={navbarStyles.navbar_user_details_sec}>
         {userDetails?.image ? (
           <div className={navbarStyles.navbar_user_image}>
             <Image
@@ -61,6 +63,8 @@ function PrimaryNavbar({ userDetails }) {
         ) : null}
         <h5 className={navbarStyles.navbar_user_name}>{userDetails?.name}</h5>
       </div>
+      </div>
+     
     </nav>
   );
 }
