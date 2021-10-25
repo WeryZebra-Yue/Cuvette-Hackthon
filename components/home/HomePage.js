@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,19 @@ import arrowGraphic from "../../assets/home/arrow.svg";
 
 import Navbar from "../navbar";
 
-function HomePage({ Session, fact }) {
+function HomePage({ Session }) {
+  const [fact,setFact] = useState();
+  const userAction = async () => {
+    const response = await fetch(
+      "https://uselessfacts.jsph.pl/random.json?language=en"
+    );
+    const myJson = await response.json(); //extract JSON from the http response
+    setFact(myJson.text);
+  };
+
+  useEffect(() => {
+    userAction();
+  }, []);
   return (
     <div className={HomePageStyles.home_page_priamry_wrapper}>
       <Navbar userDetails={Session.user} />

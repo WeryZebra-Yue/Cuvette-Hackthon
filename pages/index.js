@@ -22,21 +22,11 @@ export default function Home({ Session }) {
     image: Session.user.image,
   });
 
-  const userAction = async () => {
-    const response = await fetch(
-      "https://uselessfacts.jsph.pl/random.json?language=en"
-    );
-    const myJson = await response.json(); //extract JSON from the http response
-    setText(myJson.text);
-  };
-
-  useEffect(() => {
-    userAction();
-  }, []);
+  
 
   return (
     <>
-      <HomePage Session={Session} fact={fact} />
+      <HomePage Session={Session}  />
     </>
   );
 }
