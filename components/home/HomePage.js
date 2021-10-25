@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +12,11 @@ import Navbar from "../navbar";
 
 function HomePage({ Session }) {
   const [fact,setFact] = useState();
+
+
+  useEffect(() => {
+    userAction();
+  }, []);
   const userAction = async () => {
     const response = await fetch(
       "https://uselessfacts.jsph.pl/random.json?language=en"
@@ -19,10 +24,6 @@ function HomePage({ Session }) {
     const myJson = await response.json(); //extract JSON from the http response
     setFact(myJson.text);
   };
-
-  useEffect(() => {
-    userAction();
-  }, []);
   return (
     <div className={HomePageStyles.home_page_priamry_wrapper}>
       <Navbar userDetails={Session.user} />
@@ -34,7 +35,7 @@ function HomePage({ Session }) {
           <div className={HomePageStyles.home_page_fact_gaphic_lines}>
             <Image src={factBgLinesGraphic} layout="responsive" />
           </div>
-          <div className={HomePageStyles.home_page_fact_text}>{fact}</div>
+      {fact &&    <div className={HomePageStyles.home_page_fact_text}>{fact}</div>}
         </div>
         <div className={HomePageStyles.home_page_content}>
           <div className={HomePageStyles.home_page_content_sec}>
